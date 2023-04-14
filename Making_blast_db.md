@@ -30,9 +30,26 @@ or
 ```
 ls -l
 ```
+# make and edit text files
+```
+emacs -nw example.txt
+```
 
-
-
-
+# loding moduals on computecanada
+```
+module load blast+/2.13.0 StdEnv/2020 gcc/9.3.0
+```
+# check jobs that are running
+```
+squeue -u name
+```
+# cancel a job
+```
+scancel jobID
+```
+# start a job
+```
+sbatch script.sh
+```
 # making blast database
 working with Ben to make blast database using the borealis genome
