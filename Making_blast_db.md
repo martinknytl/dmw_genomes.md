@@ -37,8 +37,14 @@ emacs -nw example.txt
 
 # loding moduals on computecanada
 ```
-module load blast+/2.13.0 StdEnv/2020 gcc/9.3.0
+module load 'blast+/2.13.0' StdEnv/2020 gcc/9.3.0
 ```
+
+# check what dependences are needed for a modual
+```
+module spider 'blast+/2.13.0'
+```
+
 # check jobs that are running
 ```
 squeue -u name
