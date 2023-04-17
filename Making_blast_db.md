@@ -22,7 +22,7 @@ pwd
 ls
 ```
 
-# detiled list files
+# detailed list files
 ```
 ls -lh
 ```
@@ -40,7 +40,7 @@ emacs -nw example.txt
 module load 'blast+/2.13.0' StdEnv/2020 gcc/9.3.0
 ```
 
-# check what dependences are needed for a modual
+# check what dependences are needed for a module
 ```
 module spider 'blast+/2.13.0'
 ```
