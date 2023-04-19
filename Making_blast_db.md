@@ -59,3 +59,12 @@ sbatch script.sh
 ```
 # making blast database
 working with Ben to make blast database using the borealis genome
+```
+makeblastdb -in xxx.fa -dbtype nucl -out xxx.fa_blastable
+```
+
+# download genome
+
+```
+wget https://ftp.xenbase.org/pub/Genomics/JGI/Xenla10.1/XENLA_10.1_genome.fa.gz
+```
