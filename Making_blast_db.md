@@ -3,6 +3,8 @@
 ssh username@graham.computecanada.ca
 ```
 # change directory
+
+first, I must to the folder "projects", than to the rrg-ben/knedlo
 ```
 cd /home/knedlo/projects
 ```
