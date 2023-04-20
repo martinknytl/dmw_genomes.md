@@ -4,7 +4,10 @@ ssh username@graham.computecanada.ca
 ```
 # change directory
 ```
-cd /home/ben/projects/rrg-ben/knedlo
+cd /home/knedlo/projects
+```
+```
+cd rrg-ben/knedlo
 ```
 # make new directory
 ```
