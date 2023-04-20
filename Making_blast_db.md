@@ -62,7 +62,10 @@ working with Ben to make blast database using the borealis genome
 ```
 makeblastdb -in xxx.fa -dbtype nucl -out xxx.fa_blastable
 ```
-
+my example:
+```
+makeblastdb -in XENLA_10.1_genome.fa -dbtype nucl -out XENLA_10.1_genome.fa_blastable
+```
 # download genome
 
 ```
