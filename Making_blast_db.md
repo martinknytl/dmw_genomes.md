@@ -72,3 +72,7 @@ wget https://ftp.xenbase.org/pub/Genomics/JGI/Xenla10.1/XENLA_10.1_genome.fa.gz
 ```
 blastn -query XBO_SOX3L.fa -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out XBO_SOX3L_to_XB
 ```
+# generate table format 6
+```
+more XBO_SOX3L_to_XL
+```
