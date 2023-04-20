@@ -10,7 +10,10 @@ cd /home/ben/projects/rrg-ben/knedlo
 ```
 mkdir borealis_genome
 ```
-
+# copy genome assembly from the folder "for_martin" to "borealis_genome
+```
+cp ../../for_martin/XB_genome_concat_scafs/* .
+```
 # print working diretory
 ```
 pwd
@@ -33,6 +36,10 @@ ls -l
 # make and edit text files
 ```
 emacs -nw example.txt
+```
+my example:
+```
+emacs -nw XBO_SOX3L.fa
 ```
 
 # loding moduals on computecanada
@@ -70,6 +77,10 @@ makeblastdb -in XENLA_10.1_genome.fa -dbtype nucl -out XENLA_10.1_genome.fa_blas
 
 ```
 wget https://ftp.xenbase.org/pub/Genomics/JGI/Xenla10.1/XENLA_10.1_genome.fa.gz
+```
+# unzip a genome assembly 
+```
+gunzip XENLA_10.1_genome.fa.gz
 ```
 # blast a query
 ```
