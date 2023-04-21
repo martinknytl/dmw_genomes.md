@@ -95,3 +95,7 @@ blastn -query XBO_SOX3L.fa -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_bl
 ```
 more XBO_SOX3L_to_XL
 ```
+# convert mapping to a file format
+```
+more XBO_SOX3L_to_XL
+```
