@@ -19,6 +19,14 @@ mkdir borealis_genome
 ```
 cp ../../for_martin/XB_genome_concat_scafs/* .
 ```
+# download genome
+```
+wget https://ftp.xenbase.org/pub/Genomics/JGI/Xenla10.1/XENLA_10.1_genome.fa.gz
+```
+# unzip a genome assembly 
+```
+gunzip XENLA_10.1_genome.fa.gz
+```
 # print working diretory
 ```
 pwd
@@ -77,15 +85,6 @@ makeblastdb -in xxx.fa -dbtype nucl -out xxx.fa_blastable
 my example:
 ```
 makeblastdb -in XENLA_10.1_genome.fa -dbtype nucl -out XENLA_10.1_genome.fa_blastable
-```
-# download genome
-
-```
-wget https://ftp.xenbase.org/pub/Genomics/JGI/Xenla10.1/XENLA_10.1_genome.fa.gz
-```
-# unzip a genome assembly 
-```
-gunzip XENLA_10.1_genome.fa.gz
 ```
 # blast a query
 ```
