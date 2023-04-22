@@ -77,12 +77,11 @@ scancel jobID
 ```
 sbatch script.sh
 ```
-# making blast database
-working with Ben to make blast database using the borealis genome
+# making XBO, XLA, and XTR blast databases
 ```
 makeblastdb -in xxx.fa -dbtype nucl -out xxx.fa_blastable
 ```
-my example:
+my XLA example:
 ```
 makeblastdb -in XENLA_10.1_genome.fa -dbtype nucl -out XENLA_10.1_genome.fa_blastable
 ```
