@@ -65,6 +65,10 @@ my example:
 ```
 emacs -nw XBO_SOX3L.fa
 ```
+`control` + `x`
+
+`control` + `c`
+
 # blast a query
 XBO SOX3 to XBO genome:
 ```
