@@ -55,7 +55,7 @@ my example:
 emacs -nw XBO_SOX3L.fa
 ```
 
-# loding moduals on computecanada
+# loding modules on computecanada
 ```
 module load 'blast+/2.13.0' StdEnv/2020 gcc/9.3.0
 ```
