@@ -86,10 +86,10 @@ X. borealis ndufs1L to XLA genome:
 cd XB_cytogenetic_probes/
 ```
 ```
+[knedlo@gra-login2 XB_cytogenetic_probes]$ more XBO_ndufs1L_to_XB
+```
+```
 [knedlo@gra-login2 XB_cytogenetic_probes]$ more XBO_ndufs1L_to_XL 
-```
-```
-
 ```
 ## save all blast results to Google Drive (last step for all mapped sequences)
 ```
