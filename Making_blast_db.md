@@ -77,7 +77,10 @@ blastn -query XBO_SOX3L.fa -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_bl
 ```
 more XBO_SOX3L_to_XB
 ```
-# save all blast results to Google Drive
+```
+[knedlo@gra-login3 knedlo]$ more XBO_SF1L_to_XL
+```
+# save all blast results to Google Drive (last step for all mapped sequences)
 ```
 rsync -axvH --no-g --no-p knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/XB_cytogenetic_probes/* .
 ```
