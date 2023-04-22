@@ -27,25 +27,6 @@ wget https://ftp.xenbase.org/pub/Genomics/JGI/Xenla10.1/XENLA_10.1_genome.fa.gz
 ```
 gunzip XENLA_10.1_genome.fa.gz
 ```
-# print working diretory
-```
-pwd
-```
-
-# list files
-
-```
-ls
-```
-
-# detailed list files
-```
-ls -lh
-```
-or 
-```
-ls -l
-```
 # make and edit text files
 ```
 emacs -nw example.txt
