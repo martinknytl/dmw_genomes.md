@@ -27,15 +27,6 @@ wget https://ftp.xenbase.org/pub/Genomics/JGI/Xenla10.1/XENLA_10.1_genome.fa.gz
 ```
 gunzip XENLA_10.1_genome.fa.gz
 ```
-# make and edit text files
-```
-emacs -nw example.txt
-```
-my example:
-```
-emacs -nw XBO_SOX3L.fa
-```
-
 # loding modules on computecanada
 ```
 module load 'blast+/2.13.0' StdEnv/2020 gcc/9.3.0
@@ -66,6 +57,14 @@ my XLA example:
 ```
 makeblastdb -in XENLA_10.1_genome.fa -dbtype nucl -out XENLA_10.1_genome.fa_blastable
 ```
+# make and edit text files
+```
+emacs -nw example.txt
+```
+my example:
+```
+emacs -nw XBO_SOX3L.fa
+```
 # blast a query
 XBO SOX3 to XBO genome:
 ```
@@ -73,7 +72,7 @@ blastn -query XBO_SOX3L.fa -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_bl
 ```
 XBO SF1 to XLA genome:
 ```
-[knedlo@gra-login3 knedlo]$ blastn -query XB_cytogenetic_probes/XBO_SF1L.fa -db XL_v10.1_genome/XENLA_10.1_genome.fa_blastable -outfmt 6 -out XBO_SF1L_to_XL
+[knedlo@gra-login3 knedlo]$ blastn -query XB_cytogenetic_probes/XBO_SF1L.fa -db XL_v10.1_genome/XENLA_10.1_genome.fa_blastable -outfmt 6 -out XB_cytogenetic_probes/XBO_SF1L_to_XL
 ```
 # open mapped table
 ```
