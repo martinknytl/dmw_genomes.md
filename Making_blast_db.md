@@ -70,6 +70,8 @@ emacs -nw XBO_SOX3L.fa
 
 `control` + `c`
 
+confirm by `y` like yes
+
 ## blast a query
 XBO SOX3 to XBO genome:
 ```
