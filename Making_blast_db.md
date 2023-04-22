@@ -73,20 +73,23 @@ emacs -nw XBO_SOX3L.fa
 confirm by `y` like yes
 
 ## blast a query
-XBO SOX3 to XBO genome:
+X. borealis ndufs1L to XBO genome:
 ```
-blastn -query XBO_SOX3L.fa -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out XBO_SOX3L_to_XB
+[knedlo@gra-login2 knedlo]$ blastn -query XB_cytogenetic_probes/XBO_ndufs1L.fa -db borealis_genome/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out XB_cytogenetic_probes/XBO_ndufs1L_to_XB
 ```
-XBO SF1 to XLA genome:
+X. borealis ndufs1L to XLA genome:
 ```
-[knedlo@gra-login3 knedlo]$ blastn -query XB_cytogenetic_probes/XBO_SF1L.fa -db XL_v10.1_genome/XENLA_10.1_genome.fa_blastable -outfmt 6 -out XB_cytogenetic_probes/XBO_SF1L_to_XL
+[knedlo@gra-login2 knedlo]$ blastn -query XB_cytogenetic_probes/XBO_ndufs1L.fa -db XL_v10.1_genome/XENLA_10.1_genome.fa_blastable -outfmt 6 -out XB_cytogenetic_probes/XBO_ndufs1L_to_XL
 ```
 ## open mapped table
 ```
-more XBO_SOX3L_to_XB
+cd XB_cytogenetic_probes/
 ```
 ```
-[knedlo@gra-login3 knedlo]$ more XBO_SF1L_to_XL
+[knedlo@gra-login2 XB_cytogenetic_probes]$ more XBO_ndufs1L_to_XL 
+```
+```
+
 ```
 ## save all blast results to Google Drive (last step for all mapped sequences)
 ```
