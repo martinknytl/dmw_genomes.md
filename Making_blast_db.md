@@ -92,5 +92,10 @@ blastn -query XBO_SOX3L.fa -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_bl
 ```
 # convert mapping to a file format
 ```
-more XBO_SOX3L_to_XL
+more XBO_SOX3L_to_XB
 ```
+# save all blast results to Google Drive
+```
+rsync -axvH --no-g --no-p knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/XB_cytogenetic_probes/* .
+```
+```*``` means the path ```/drives/g/My Drive/pracovni slozka/vyzkum/moje publikace/rozpracovane/Xenopus borealis/blast```
