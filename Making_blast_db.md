@@ -70,7 +70,10 @@ makeblastdb -in XENLA_10.1_genome.fa -dbtype nucl -out XENLA_10.1_genome.fa_blas
 ```
 blastn -query XBO_SOX3L.fa -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out XBO_SOX3L_to_XB
 ```
-# convert mapping to a file format
+```
+[knedlo@gra-login3 knedlo]$ blastn -query XB_cytogenetic_probes/XBO_SF1L.fa -db XL_v10.1_genome/XENLA_10.1_genome.fa_blastable -outfmt 6 -out XBO_SF1L_to_XL
+```
+# open mapped table
 ```
 more XBO_SOX3L_to_XB
 ```
