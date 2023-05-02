@@ -97,7 +97,7 @@ rsync -axvH --no-g --no-p knedlo@graham.computecanada.ca:/home/knedlo/projects/r
 ```
 ```*``` means the path ```/drives/g/My Drive/pracovni slozka/vyzkum/moje publikace/rozpracovane/Xenopus borealis/blast```
 
-# Get coordinates from gff3 file:
+## Get coordinates from gff3 file:
 
 Working in this directory on graham:
 ```
