@@ -11,9 +11,12 @@ cd /home/knedlo/projects
 ```
 cd rrg-ben/knedlo
 ```
-## make new directory
+## make new directory and go there
 ```
 mkdir borealis_genome
+```
+```
+cd borealis_genome
 ```
 ## copy genome assembly from the folder "for_martin" to "borealis_genome
 ```
