@@ -125,9 +125,7 @@ Then blast this against the Xborealis genome:
 ```
 blastn -query test.fa -db Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out test.out
 ```
-```
 ## Extract only the coding regions from the gff3 file for XL
-```
 ```
 cat XENLA_10.1_GCF.gff3 | grep 'CDS' > XENLA_10.1_GCF_CDS_only.txt
 ```
