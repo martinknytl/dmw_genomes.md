@@ -125,17 +125,22 @@ Then blast this against the Xborealis genome:
 ```
 blastn -query test.fa -db Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out test.out
 ```
-
+```
 ## Extract only the coding regions from the gff3 file for XL
+```
+```
 cat XENLA_10.1_GCF.gff3 | grep 'CDS' > XENLA_10.1_GCF_CDS_only.txt
-
+```
 ## make a bed file out of this text file
+```
 cat XENLA_10.1_GCF_CDS_only.txt | cut -f1,4,5 > XENLA_10.1_GCF_CDS_only.bed
-
+```
 ## Now get the fasta sequences for each of the coding regions from the XL genome
+```
 module load bedtools
 bedtools getfasta -fi ../2021_XL_v10_refgenome/XENLA_10.1_genome.fa -bed XENLA_10.1_GCF_CDS_only.bed -fo XENLA_10.1_GCF_CDS_only.fasta
-
+```
+```
 bedtools getfasta --help
-
+```
 
