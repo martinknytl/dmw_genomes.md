@@ -100,6 +100,28 @@ rsync -axvH --no-g --no-p knedlo@graham.computecanada.ca:/home/knedlo/projects/r
 ```
 ```*``` means the path ```/drives/g/My Drive/pracovni slozka/vyzkum/moje publikace/rozpracovane/Xenopus borealis/blast```
 
+# Mapping of genes from Session et al on X. borealis chromosomes
+
+to download XLA and XTR genes mapped from the study Session et al. 2016:
+
+```
+wget https://download.xenbase.org/xenbase/Genomics/JGI/Xenla10.1/XENLA_10.1_GCF.gff3.gz
+```
+
+```
+wget https://download.xenbase.org/xenbase/Genomics/JGI/Xentr10.0/XENTR_10.0_Xenbase.gff3.gz 
+```
+
+to unzip both files:
+
+```
+gunzip XENLA_10.1_GCF.gff3.gz
+```
+
+```
+gunzip XENTR_10.0_Xenbase.gff3.gz
+```
+
 ## Get coordinates from gff3 file:
 
 Working in this directory on graham:
