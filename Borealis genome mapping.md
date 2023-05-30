@@ -141,7 +141,7 @@ cat XENLA_10.1_GCF.gff3 | grep 'CDS' > XENLA_10.1_GCF_CDS_only.txt
 ```
 ## make a bed file out of this text file
 ```
-cat XENLA_10.1_GCF_CDS_only.txt | cut -f1,4,5 > XENLA_10.1_GCF_CDS_only.bed
+cat XENLA_10.1_GCF_CDS_only.txt | cut -f1,4,5 > XENLA_10.1_GCF_CDS_only_column1_4_5.bed
 ```
 ## Now get the fasta sequences for each of the coding regions from the XL genome
 
