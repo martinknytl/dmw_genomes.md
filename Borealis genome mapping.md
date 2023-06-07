@@ -22,7 +22,7 @@ cd borealis_genome
 ```
 cp ../../for_martin/XB_genome_concat_scafs/* .
 ```
-## download genome
+## download the laevis genome
 ```
 wget https://ftp.xenbase.org/pub/Genomics/JGI/Xenla10.1/XENLA_10.1_genome.fa.gz
 ```
