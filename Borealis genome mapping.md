@@ -60,7 +60,7 @@ my XLA example:
 ```
 makeblastdb -in XENLA_10.1_genome.fa -dbtype nucl -out XENLA_10.1_genome.fa_blastable
 ```
-## make and edit text files for each sequence separately
+## make and edit the Emacs files for each sequence separately
 ```
 emacs -nw example.txt
 ```
@@ -69,11 +69,20 @@ my example:
 emacs -nw XBO_SOX3L.fa
 ```
 
+you must copy the fasta sequence and save using the following typing
+
 `control` + `x`
 
 `control` + `c`
 
 confirm by `y` like yes
+
+## or use Vi editor
+
+```
+vi XTR_28S_AB.fa 
+```
+copy the fasta sequence here and save using ```:wq``` in the normal mode
 
 ## blast a query
 X. borealis ndufs1L to XBO genome:
