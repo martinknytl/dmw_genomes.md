@@ -1,6 +1,6 @@
 ## connect to compute Canada
 ```
-ssh username@graham.computecanada.ca
+ssh knedlo@graham.computecanada.ca
 ```
 ## change directory
 
@@ -18,7 +18,7 @@ mkdir borealis_genome
 ```
 cd borealis_genome
 ```
-## copy genome assembly from the folder "for_martin" to "borealis_genome
+## copy genome assembly from the folder "for_martin" to "borealis_genome"
 ```
 cp ../../for_martin/XB_genome_concat_scafs/* .
 ```
