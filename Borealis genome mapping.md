@@ -165,14 +165,10 @@ cat XENLA_10.1_GCF_CDS_only.txt | cut -f1,4,5 > XENLA_10.1_GCF_CDS_only_column1_
 cat XENTR_10.0_Xenbase_CDS_only.txt | cut -f1,4,5 > XENTR_10.0_Xenbase_CDS_only_column1_4_5.bed
 ```
 
-## Now get the fasta sequences for each of the coding regions from the XL genome
+## get the fasta sequences for each of the coding regions from the XL genome
 
-module load bedtools
 ```
-bedtools getfasta -fi ../2021_XL_v10_refgenome/XENLA_10.1_genome.fa -bed XENLA_10.1_GCF_CDS_only.bed -fo XENLA_10.1_GCF_CDS_only.fasta
-```
-```
-bedtools getfasta --help
+bedtools getfasta -fi /home/knedlo/projects/rrg-ben/knedlo/XL_v10.1_genome/XENLA_10.1_genome.fa -bed XENLA_10.1_GCF_CDS_only_column1_4_5.bed -fo XENLA_10.1_GCF_CDS_only.fasta
 ```
 
 * for XB
