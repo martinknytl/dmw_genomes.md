@@ -22,16 +22,20 @@ cd borealis_genome
 ```
 cp ../../for_martin/XB_genome_concat_scafs/* .
 ```
-## download the laevis genome
+## download the laevis and tropicalis genome
 ```
 wget https://ftp.xenbase.org/pub/Genomics/JGI/Xenla10.1/XENLA_10.1_genome.fa.gz
 
-https://www.xenbase.org/xenbase/displayJBrowse.do?data=data/xl10_1
+wget https://download.xenbase.org/xenbase/Genomics/JGI/Xentr10.0/XENTR_10.0_genome.fasta.gz
 ```
-## unzip a genome assembly 
+
+## unzip a genome assemblies
 ```
 gunzip XENLA_10.1_genome.fa.gz
+
+gunzip XENTR_10.0_genome.fasta.gz
 ```
+
 ## loding modules on computecanada
 ```
 module load 'blast+/2.13.0' StdEnv/2020 gcc/9.3.0
