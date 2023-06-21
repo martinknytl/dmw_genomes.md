@@ -186,5 +186,5 @@ Then blast this against the Xborealis genome:
 ```
 blastn -query test.fa -db Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out test.out
 
-blastn -query ../Session_anotated_genes/XENTR_10.0_genes_for_mapping-CDS-column1_4_5-sequence.fasta -db Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out session_genes_to_borealis_genome.out
+blastn -query ../Session_anotated_genes/XENTR_10.0_genes_for_mapping-CDS-column1_4_5-sequence.fasta -db Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out tropicalis_session_genes_to_borealis_genome.out
 ```
