@@ -130,8 +130,9 @@ blastn -query ../Session_anotated_genes/XENTR_10.0_genes_for_mapping-CDS-column1
 ```
 
 ## blast tropicalis anotated CDS against tropicalis genome
-
+```
 blastn -query XENTR_10.0_genes_for_mapping-CDS-column1_4_5-sequence.fasta -db ../tropicalis_genome/XENTR_10.0_genome.fa_blastable -outfmt 6 -out tropicalis_session_genes_to_tropicalis_genome.out
+```
 
 ## cut reference genome (chromosome) ID (column 2) 
 
