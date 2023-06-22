@@ -182,7 +182,7 @@ bedtools getfasta -fi /home/knedlo/projects/rrg-ben/knedlo/XL_v10.1_genome/XENLA
 * for XB
 Make multifasta file with X. trop seqs for all genes
 
-Then blast this against the Xborealis genome:
+## blast this against the Xborealis genome:
 ```
 blastn -query test.fa -db Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out test.out
 
