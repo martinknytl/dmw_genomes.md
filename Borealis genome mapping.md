@@ -100,22 +100,16 @@ grep -w 'gprin3\|ugt8\|pitx2\|metap1\|ccrn4l\|spry1\|smad1\|ednra\|hand2\|kit\|f
 
 ## Extract only the coding regions from the txt file
 
-* for XL
 ```
 cat XENLA_10.1_GCF.gff3 | grep 'CDS' > XENLA_10.1_GCF_CDS_only.txt
-```
 
-* for trop
-
-```
 grep 'CDS' XENTR_10.0_genes_for_mapping.txt > XENTR_10.0_genes_for_mapping-CDS.txt
 ```
 
 ## make a bed file with 1, 4 and 5 columns
 ```
 cat XENLA_10.1_GCF_CDS_only.txt | cut -f1,4,5 > XENLA_10.1_GCF_CDS_only_column1_4_5.bed
-```
-```
+
 cat XENTR_10.0_genes_for_mapping-CDS.txt | cut -f1,4,5 > XENTR_10.0_genes_for_mapping-CDS-column1_4_5.bed
 ```
 
@@ -127,15 +121,22 @@ bedtools getfasta -fi /home/knedlo/projects/rrg-ben/knedlo/XL_v10.1_genome/XENLA
 bedtools getfasta -fi /home/knedlo/projects/rrg-ben/knedlo/tropicalis_genome/XENTR_10.0_genome.fasta -bed XENTR_10.0_genes_for_mapping-CDS-column1_4_5.bed -fo XENTR_10.0_genes_for_mapping-CDS-column1_4_5-sequence.fasta
 ```
 
-* for XB
-Make multifasta file with X. trop seqs for all genes
 
-## blast this against the Xborealis genome:
+## blast the tropicalis/laevis anotated CDS against the Xborealis genome:
 ```
 blastn -query test.fa -db Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out test.out
 
 blastn -query ../Session_anotated_genes/XENTR_10.0_genes_for_mapping-CDS-column1_4_5-sequence.fasta -db Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out tropicalis_session_genes_to_borealis_genome.out
 ```
+
+## blast tropicalis anotated CDS against tropicalis genome
+
+blastn -query XENTR_10.0_genes_for_mapping-CDS-column1_4_5-sequence.fasta -db ../tropicalis_genome/XENTR_10.0_genome.fa_blastable -outfmt 6 -out tropicalis_session_genes_to_tropicalis_genome.out
+
+## cut reference genome (chromosome) ID (column 2) 
+
+
+
 
 ## make and edit the Emacs files for each sequence separately
 ```
