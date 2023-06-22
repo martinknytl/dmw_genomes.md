@@ -4,20 +4,10 @@ ssh knedlo@graham.computecanada.ca
 ```
 ## change directory
 
-first, I must go to the folder "projects", than to the "rrg-ben/knedlo"
 ```
-cd /home/knedlo/projects
+cd /home/knedlo/projects/rrg-ben/knedlo
 ```
-```
-cd rrg-ben/knedlo
-```
-## make new directory and go there
-```
-mkdir borealis_genome
-```
-```
-cd borealis_genome
-```
+
 ## copy genome assembly from the folder "for_martin" to "borealis_genome"
 ```
 cp ../../for_martin/XB_genome_concat_scafs/* .
@@ -62,58 +52,14 @@ sbatch script.sh
 ```
 makeblastdb -in xxx.fa -dbtype nucl -out xxx.fa_blastable
 ```
-my XLA example:
+
 ```
+makeblastdb -in Xbo.v1_chrs_and_concatscafs.fa -dbtype nucl -out Xbo.v1_chrs_and_concatscafs_blastable
+
 makeblastdb -in XENLA_10.1_genome.fa -dbtype nucl -out XENLA_10.1_genome.fa_blastable
-```
-## make and edit the Emacs files for each sequence separately
-```
-emacs -nw example.txt
-```
-my example:
-```
-emacs -nw XBO_SOX3L.fa
-```
 
-you must copy the fasta sequence and save using the following typing
-
-`control` + `x`
-
-`control` + `c`
-
-confirm by `y` like yes
-
-## or use Vi editor
-
+makeblastdb -in XENTR_10.0_genome.fasta -dbtype nucl -out XENTR_10.0_genome.fa_blastable
 ```
-vi XTR_28S_AB.fa 
-```
-copy the fasta sequence here and save using ```:wq``` in the normal mode
-
-## blast a query
-X. borealis ndufs1L to XBO genome:
-```
-[knedlo@gra-login2 knedlo]$ blastn -query XB_cytogenetic_probes/XBO_ndufs1L.fa -db borealis_genome/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out XB_cytogenetic_probes/XBO_ndufs1L_to_XB
-```
-X. borealis ndufs1L to XLA genome:
-```
-[knedlo@gra-login2 knedlo]$ blastn -query XB_cytogenetic_probes/XBO_ndufs1L.fa -db XL_v10.1_genome/XENLA_10.1_genome.fa_blastable -outfmt 6 -out XB_cytogenetic_probes/XBO_ndufs1L_to_XL
-```
-## open mapped table
-```
-cd XB_cytogenetic_probes/
-```
-```
-[knedlo@gra-login2 XB_cytogenetic_probes]$ more XBO_ndufs1L_to_XB
-```
-```
-[knedlo@gra-login2 XB_cytogenetic_probes]$ more XBO_ndufs1L_to_XL 
-```
-## save all blast results to Google Drive (last step for all mapped sequences)
-```
-rsync -axvH --no-g --no-p knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/XB_cytogenetic_probes/* .
-```
-```.``` means the path ```/drives/g/My Drive/pracovni slozka/vyzkum/moje publikace/rozpracovane/Xenopus borealis/blast```
 
 # Mapping of genes from Session et al on X. borealis chromosomes
 
@@ -173,10 +119,12 @@ cat XENLA_10.1_GCF_CDS_only.txt | cut -f1,4,5 > XENLA_10.1_GCF_CDS_only_column1_
 cat XENTR_10.0_genes_for_mapping-CDS.txt | cut -f1,4,5 > XENTR_10.0_genes_for_mapping-CDS-column1_4_5.bed
 ```
 
-## get the fasta sequences for each of the coding regions from the XL genome
+## get the fasta sequences for each of the coding regions
 
 ```
 bedtools getfasta -fi /home/knedlo/projects/rrg-ben/knedlo/XL_v10.1_genome/XENLA_10.1_genome.fa -bed XENLA_10.1_GCF_CDS_only_column1_4_5.bed -fo XENLA_10.1_GCF_CDS_only.fasta
+
+bedtools getfasta -fi /home/knedlo/projects/rrg-ben/knedlo/tropicalis_genome/XENTR_10.0_genome.fasta -bed XENTR_10.0_genes_for_mapping-CDS-column1_4_5.bed -fo XENTR_10.0_genes_for_mapping-CDS-column1_4_5-sequence.fasta
 ```
 
 * for XB
@@ -188,3 +136,52 @@ blastn -query test.fa -db Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out t
 
 blastn -query ../Session_anotated_genes/XENTR_10.0_genes_for_mapping-CDS-column1_4_5-sequence.fasta -db Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out tropicalis_session_genes_to_borealis_genome.out
 ```
+
+## make and edit the Emacs files for each sequence separately
+```
+emacs -nw example.txt
+```
+my example:
+```
+emacs -nw XBO_SOX3L.fa
+```
+
+you must copy the fasta sequence and save using the following typing
+
+`control` + `x`
+
+`control` + `c`
+
+confirm by `y` like yes
+
+## or use Vi editor
+
+```
+vi XTR_28S_AB.fa 
+```
+copy the fasta sequence here and save using ```:wq``` in the normal mode
+
+## blast a query
+X. borealis ndufs1L to XBO genome:
+```
+[knedlo@gra-login2 knedlo]$ blastn -query XB_cytogenetic_probes/XBO_ndufs1L.fa -db borealis_genome/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out XB_cytogenetic_probes/XBO_ndufs1L_to_XB
+```
+X. borealis ndufs1L to XLA genome:
+```
+[knedlo@gra-login2 knedlo]$ blastn -query XB_cytogenetic_probes/XBO_ndufs1L.fa -db XL_v10.1_genome/XENLA_10.1_genome.fa_blastable -outfmt 6 -out XB_cytogenetic_probes/XBO_ndufs1L_to_XL
+```
+## open mapped table
+```
+cd XB_cytogenetic_probes/
+```
+```
+[knedlo@gra-login2 XB_cytogenetic_probes]$ more XBO_ndufs1L_to_XB
+```
+```
+[knedlo@gra-login2 XB_cytogenetic_probes]$ more XBO_ndufs1L_to_XL 
+```
+## save all blast results to Google Drive (last step for all mapped sequences)
+```
+rsync -axvH --no-g --no-p knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/XB_cytogenetic_probes/* .
+```
+```.``` means the path ```/drives/g/My Drive/pracovni slozka/vyzkum/moje publikace/rozpracovane/Xenopus borealis/blast```
