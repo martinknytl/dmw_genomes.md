@@ -1,4 +1,4 @@
-**1)dowload sequencing files to /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/raw_data**
+### 1)dowload sequencing files to /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/raw_data**
 
 ```
 mkdir 2023_clivii_largeni_pygmaeus
@@ -7,7 +7,7 @@ cp ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/raw_data/* .
 ```
 ```.``` /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/raw_data
 
-### Run trimmomatic
+### 2) Run trimmomatic
 ```
 cp -r ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/ben_scripts/ .
 ```
@@ -38,7 +38,8 @@ for file in $1/*_R1.fastq.gz; do         # Use ./* ... NEVER bare *
   fi
 done
 ```
-
+Trimmomatic can be executed by:
+```
 sbatch ../ben_scripts/2020_trimmomatic.sh .
-
+```
 cp ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/ben_scripts/TruSeq2_and_3-PE-2.fa .
