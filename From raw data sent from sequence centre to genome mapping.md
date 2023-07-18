@@ -1,4 +1,4 @@
-*1)dowload files: open screen; make a directory; open it***
+*1)dowload files: open screen; make a directory; open it*
 
 
 
