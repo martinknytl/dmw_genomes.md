@@ -1,4 +1,4 @@
-### 1)dowload sequencing files to /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/raw_data**
+### 1) dowload sequencing files to /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/raw_data**
 
 ```
 mkdir 2023_clivii_largeni_pygmaeus
