@@ -1,5 +1,6 @@
 ### 1) dowload sequencing files to /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/raw_data**
 
+each sample has R1 and R2 raw reads = 28 samples = 56 files
 ```
 mkdir 2023_clivii_largeni_pygmaeus
 mkdir raw_data
@@ -43,3 +44,7 @@ Trimmomatic can be executed by:
 sbatch ../ben_scripts/2020_trimmomatic.sh .
 ```
 cp ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/ben_scripts/TruSeq2_and_3-PE-2.fa .
+
+### 3) map trimmed sequences to X. laevis genome
+
+each sample has R1 and R2 raw reads, R1 and R2 trimmed reads, and R1 and R2 single reads
