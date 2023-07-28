@@ -13,6 +13,8 @@ cp ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/raw_data/* .
 cp -r ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/ben_scripts/ .
 ```
 ```.``` /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/ben_scripts
+
+2020_trimmomatic.sh script:
 ```
 #!/bin/sh
 #SBATCH --job-name=trimmomatic
@@ -47,4 +49,4 @@ cp ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/ben_scripts/TruSeq
 
 ### 3) map trimmed sequences to X. laevis genome
 
-each sample has R1 and R2 raw reads, R1 and R2 trimmed reads, and R1 and R2 single reads
+each sample has (/<raw_data/> folder) R1 and R2 raw reads, R1 and R2 trimmed reads, and R1 and R2 single reads
