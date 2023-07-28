@@ -50,3 +50,48 @@ cp ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/ben_scripts/TruSeq
 ### 3) map trimmed sequences to X. laevis genome
 
 each sample has (\<raw_data\> folder) R1 and R2 raw reads, R1 and R2 trimmed reads, and R1 and R2 single reads
+```
+mkdir temp1
+mv NS.LH00147_0009.001.IDT_i7_18---IDT_i5_18.BJE1507-pool_trim_R*.fq.gz temp1
+mv NS.LH00147_0009.001.IDT_i7_19---IDT_i5_19.Cas260421_female_trim_R*.fq.gz temp1/
+mv NS.LH00147_0009.001.IDT_i7_20---IDT_i5_20.AMNH17295_female_trim_R*.fq.gz temp1/
+mv NS.LH00147_0009.001.IDT_i7_21---IDT_i5_21.Z23339_male_trim_R*.fq.gz temp1/
+mv NS.LH00147_0009.001.IDT_i7_30---IDT_i5_30.Z23341_female_trim_R*.fq.gz temp1/
+mv NS.LH00147_0009.001.IDT_i7_31---IDT_i5_31.AMNH17292_female_trim_R*.fq.gz temp1/
+mv NS.LH00147_0009.001.IDT_i7_32---IDT_i5_32.Cas262486_male_trim_R*.fq.gz temp1/
+mv  NS.LH00147_0009.001.IDT_i7_33---IDT_i5_33.BJE1506-pool_trim_R*.fq.gz temp1/
+mv  NS.LH00147_0009.001.IDT_i7_42---IDT_i5_42.Cas262409_male_trim_R*.fq.gz temp1/
+mv NS.LH00147_0009.001.IDT_i7_43---IDT_i5_43.Z23350_male_trim_R*.fq.gz temp1/
+```
+
+```
+#!/bin/sh
+#SBATCH --job-name=bwa_align
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=4
+#SBATCH --time=120:00:00
+#SBATCH --mem=32gb
+#SBATCH --output=bwa_align.%J.out
+#SBATCH --error=bwa_align.%J.err
+#SBATCH --account=def-ben
+
+# run by passing an argument like this (in the directory with the files)
+# sbatch 2020_align_paired_fq_to_ref.sh pathandname_of_ref path_to_paired_fq_filez
+# sbatch 2020_align_paired_fq_to_ref.sh /home/ben/projects/rrg-ben/ben/2018_Austin_XB_genome/Austin_genome/Xbo.v1.fa.gz pathtofqfilez
+
+module load bwa/0.7.17
+module load samtools/1.10
+
+
+for file in ${2}/*_trim_R2.fq.gz ; do         # Use ./* ... NEVER bare *    
+    if [ -e "$file" ] ; then   # Check whether file exists.
+        bwa mem ${1} ${file::-14}_trim_R1.fq.gz ${file::-14}_trim_R2.fq.gz -t 16 | samtools view -Shu - | samtools sort - -o ${file::-14}_sorted.bam
+        samtools index ${file::-14}_sorted.bam
+  fi
+done
+```
+
+```
+sbatch ../../ben_scripts/2020_align_paired_fq_to_ref.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa .
+```
+```.``` /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/raw_data/temp1
