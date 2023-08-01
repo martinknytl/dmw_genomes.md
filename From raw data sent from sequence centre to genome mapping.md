@@ -2,7 +2,7 @@
 
 each sample has R1 and R2 raw reads and is present three times = 28 samples *2 = 56 files *3 = 168 files in total
 
-check it using 'ls -1 | wc -l' in the folder 'for_martin'
+check it using `ls -1 | wc -l` in the folder `for_martin`
 
 ```
 mkdir 2023_clivii_largeni_pygmaeus
