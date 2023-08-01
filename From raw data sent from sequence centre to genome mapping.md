@@ -120,7 +120,7 @@ from directory
 ls *trim_R*
 ```
 
-copy first 20 files without enters:
+copy and paste first 20 files to Gibhub, remove enters, and add `mv` at the very beginning and `temp2` as a destination folder
 ```
 mv NS.LH00147_0009.001.IDT_i7_44---IDT_i5_44.XEN170_female_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_44---IDT_i5_44.XEN170_female_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_45---IDT_i5_45.Z23340_female_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_45---IDT_i5_45.Z23340_female_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_54---IDT_i5_54.BJE1508-pool_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_54---IDT_i5_54.BJE1508-pool_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_55---IDT_i5_55.CAS260423-pool_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_55---IDT_i5_55.CAS260423-pool_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_56---IDT_i5_56.Cas262487_male_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_56---IDT_i5_56.Cas262487_male_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_66---IDT_i5_66.Z23342_female_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_66---IDT_i5_66.Z23342_female_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_67---IDT_i5_67.AMNH17293_male_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_67---IDT_i5_67.AMNH17293_male_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_68---IDT_i5_68.Z23337-pool_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_68---IDT_i5_68.Z23337-pool_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_6---IDT_i5_6.Cas260390_female_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_6---IDT_i5_6.Cas260390_female_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_78---IDT_i5_78.Cas260422_female_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_78---IDT_i5_78.Cas260422_female_trim_R2.fq.gz temp2/
 ```
