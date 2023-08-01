@@ -109,3 +109,26 @@ sbatch ../../ben_scripts/2020_align_paired_fq_to_ref.sh /home/knedlo/projects/rr
 
 sbatch /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/ben_scripts/2020_align_paired_fq_to_ref.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/raw_data/temp2
 ```
+
+movement the other 10 trimmed files:
+
+from directory
+`/home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/raw_data`
+```
+ls *trim_R*
+```
+
+copy first 20 files:
+```
+NS.LH00147_0009.001.IDT_i7_44---IDT_i5_44.XEN170_female_trim_R1.fq.gz
+NS.LH00147_0009.001.IDT_i7_44---IDT_i5_44.XEN170_female_trim_R2.fq.gz
+NS.LH00147_0009.001.IDT_i7_45---IDT_i5_45.Z23340_female_trim_R1.fq.gz
+NS.LH00147_0009.001.IDT_i7_45---IDT_i5_45.Z23340_female_trim_R2.fq.gz
+NS.LH00147_0009.001.IDT_i7_54---IDT_i5_54.BJE1508-pool_trim_R1.fq.gz
+NS.LH00147_0009.001.IDT_i7_54---IDT_i5_54.BJE1508-pool_trim_R2.fq.gz
+NS.LH00147_0009.001.IDT_i7_55---IDT_i5_55.CAS260423-pool_trim_R1.fq.gz
+NS.LH00147_0009.001.IDT_i7_55---IDT_i5_55.CAS260423-pool_trim_R2.fq.gz
+NS.LH00147_0009.001.IDT_i7_56---IDT_i5_56.Cas262487_male_trim_R1.fq.gz
+NS.LH00147_0009.001.IDT_i7_56---IDT_i5_56.Cas262487_male_trim_R2.fq.gz
+```
+these files move to the `temp2` folder
