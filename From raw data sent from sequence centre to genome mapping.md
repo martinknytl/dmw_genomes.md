@@ -14,7 +14,7 @@ cp -r ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/ben_scripts/ .
 ```
 ```.``` /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/ben_scripts
 
-2020_trimmomatic.sh script:
+**2020_trimmomatic.sh script**
 ```
 #!/bin/sh
 #SBATCH --job-name=trimmomatic
@@ -49,7 +49,9 @@ cp ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/ben_scripts/TruSeq
 
 ### 3) map trimmed sequences to X. laevis genome
 
-each sample has (\<raw_data\> folder) R1 and R2 raw reads, R1 and R2 trimmed reads, and R1 and R2 single reads
+each sample has (in the \<raw_data\> folder) R1 and R2 raw reads, R1 and R2 trimmed reads, and R1 and R2 single reads
+
+first 10 R1 and R2 trimmed reads moved to the temp1 folder: 
 ```
 mkdir temp1
 mv NS.LH00147_0009.001.IDT_i7_18---IDT_i5_18.BJE1507-pool_trim_R*.fq.gz temp1
@@ -64,6 +66,7 @@ mv  NS.LH00147_0009.001.IDT_i7_42---IDT_i5_42.Cas262409_male_trim_R*.fq.gz temp1
 mv NS.LH00147_0009.001.IDT_i7_43---IDT_i5_43.Z23350_male_trim_R*.fq.gz temp1/
 ```
 
+**mapping script**
 ```
 #!/bin/sh
 #SBATCH --job-name=bwa_align
@@ -91,6 +94,7 @@ for file in ${2}/*_trim_R2.fq.gz ; do         # Use ./* ... NEVER bare *
 done
 ```
 
+**mapping script executed by**
 ```
 sbatch ../../ben_scripts/2020_align_paired_fq_to_ref.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa .
 ```
