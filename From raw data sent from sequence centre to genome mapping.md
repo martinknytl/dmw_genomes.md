@@ -11,7 +11,20 @@ cp ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/raw_data/* .
 ```
 ```.``` /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/raw_data
 
-### 2) Run trimmomatic
+### 2)FastQC 
+
+```
+for i in *fastq.gz ; do fastqc $i; done
+```
+fastqc files with .html prefix will be created in same folder as raw data
+
+go to folder where you want to create folder with fastqc.html files, make a directory 'mkdir fastqc_raw' ; dowload files to my googledisk account using command:
+
+```
+scp knedlo@graham.computecanada.ca:/home/knedlo... .. .. .. /*fastqc.html .
+```
+
+### 3) Run trimmomatic
 ```
 cp -r ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/ben_scripts/ .
 ```
@@ -52,7 +65,7 @@ sbatch ../ben_scripts/2020_trimmomatic.sh .
 cp ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/ben_scripts/TruSeq2_and_3-PE-2.fa .
 ```
 
-### 3) map trimmed sequences to X. laevis genome
+### 4) map trimmed sequences to X. laevis genome
 
 each sample has (in the `raw_data` folder) R1 and R2 raw reads, R1 and R2 trimmed reads, and R1 and R2 single reads
 
@@ -128,13 +141,10 @@ copy and paste first 20 files to Gibhub, remove enters, and add `mv` at the very
 mv NS.LH00147_0009.001.IDT_i7_44---IDT_i5_44.XEN170_female_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_44---IDT_i5_44.XEN170_female_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_45---IDT_i5_45.Z23340_female_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_45---IDT_i5_45.Z23340_female_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_54---IDT_i5_54.BJE1508-pool_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_54---IDT_i5_54.BJE1508-pool_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_55---IDT_i5_55.CAS260423-pool_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_55---IDT_i5_55.CAS260423-pool_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_56---IDT_i5_56.Cas262487_male_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_56---IDT_i5_56.Cas262487_male_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_66---IDT_i5_66.Z23342_female_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_66---IDT_i5_66.Z23342_female_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_67---IDT_i5_67.AMNH17293_male_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_67---IDT_i5_67.AMNH17293_male_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_68---IDT_i5_68.Z23337-pool_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_68---IDT_i5_68.Z23337-pool_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_6---IDT_i5_6.Cas260390_female_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_6---IDT_i5_6.Cas260390_female_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_78---IDT_i5_78.Cas260422_female_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_78---IDT_i5_78.Cas260422_female_trim_R2.fq.gz temp2/
 ```
 
-similarly to the temp3 folder
+similarly for the `temp3` folder etc. to the `tempX`
 ```
 ls *trim_R*
 ```
 ```
 mv NS.LH00147_0009.001.IDT_i7_79---IDT_i5_79.CAS260425-pool_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_79---IDT_i5_79.CAS260425-pool_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_7---IDT_i5_7.Z23349_male_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_7---IDT_i5_7.Z23349_male_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_80---IDT_i5_80.Cas262488_male_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_80---IDT_i5_80.Cas262488_male_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_8---IDT_i5_8.Cas260426_male_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_8---IDT_i5_8.Cas260426_male_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_90---IDT_i5_90.BJE1509-pool_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_90---IDT_i5_90.BJE1509-pool_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_91---IDT_i5_91.AMNH17294_male_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_91---IDT_i5_91.AMNH17294_male_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_92---IDT_i5_92.Z23338_female_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_92---IDT_i5_92.Z23338_female_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_9---IDT_i5_9.BJE1505-pool_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_9---IDT_i5_9.BJE1505-pool_trim_R2.fq.gz NS.LH00147_0009.002.IDT_i7_18---IDT_i5_18.BJE1507-pool_trim_R1.fq.gz NS.LH00147_0009.002.IDT_i7_18---IDT_i5_18.BJE1507-pool_trim_R2.fq.gz NS.LH00147_0009.002.IDT_i7_19---IDT_i5_19.Cas260421_female_trim_R1.fq.gz NS.LH00147_0009.002.IDT_i7_19---IDT_i5_19.Cas260421_female_trim_R2.fq.gz temp3/
 ```
-
-
-
