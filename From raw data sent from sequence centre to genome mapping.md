@@ -148,3 +148,40 @@ ls *trim_R*
 ```
 mv NS.LH00147_0009.001.IDT_i7_79---IDT_i5_79.CAS260425-pool_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_79---IDT_i5_79.CAS260425-pool_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_7---IDT_i5_7.Z23349_male_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_7---IDT_i5_7.Z23349_male_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_80---IDT_i5_80.Cas262488_male_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_80---IDT_i5_80.Cas262488_male_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_8---IDT_i5_8.Cas260426_male_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_8---IDT_i5_8.Cas260426_male_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_90---IDT_i5_90.BJE1509-pool_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_90---IDT_i5_90.BJE1509-pool_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_91---IDT_i5_91.AMNH17294_male_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_91---IDT_i5_91.AMNH17294_male_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_92---IDT_i5_92.Z23338_female_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_92---IDT_i5_92.Z23338_female_trim_R2.fq.gz NS.LH00147_0009.001.IDT_i7_9---IDT_i5_9.BJE1505-pool_trim_R1.fq.gz NS.LH00147_0009.001.IDT_i7_9---IDT_i5_9.BJE1505-pool_trim_R2.fq.gz NS.LH00147_0009.002.IDT_i7_18---IDT_i5_18.BJE1507-pool_trim_R1.fq.gz NS.LH00147_0009.002.IDT_i7_18---IDT_i5_18.BJE1507-pool_trim_R2.fq.gz NS.LH00147_0009.002.IDT_i7_19---IDT_i5_19.Cas260421_female_trim_R1.fq.gz NS.LH00147_0009.002.IDT_i7_19---IDT_i5_19.Cas260421_female_trim_R2.fq.gz temp3/
 ```
+
+### 5) merge 3 bam files in 1
+
+```
+mkdir bams_combined
+mkdir temp1
+```
+
+check if there are 3 files with the name AMNH17292:
+`ls ../raw_data/*/*AMNH17292*` shows 12 files: 3 R1_trimmed, 3 R2_trimmed, 3 sorted.bam, and 3 sorted.bam.bai
+`ls ../raw_data/*/*AMNH17292*bam*` shows 6 files: 3 sorted.bam, and 3 sorted.bam.bai
+`ls ../raw_data/*/*AMNH17292*bam` shows 3 sorted.bam files
+
+a script for merging:
+```
+#!/bin/sh
+#SBATCH --job-name=merge
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=4
+#SBATCH --time=32:00:00
+#SBATCH --mem=16gb
+#SBATCH --output=merge.%J.out
+#SBATCH --error=merge.%J.err
+#SBATCH --account=def-ben
+
+# run by passing an argument like this (in the directory with the files)
+# sbatch 2021_samtools_merge3.sh merged_path_and_outfile in1_path_and_file in2_path_and_file in3_path_and_file in4_path_and_file
+module load samtools/1.10
+
+samtools merge ${1} ${2} ${3} ${4}
+samtools index ${1)
+```
+
+the script execution:
+```
+sbatch 2021_samtools_merge3.sh ../bams_combined/AMNH17292_female_sorted.bam ../raw_data/temp1/NS.LH00147_0009.001.IDT_i7_31---IDT_i5_31.AMNH17292_female_sorted.bam ../raw_data/temp4/NS.LH00147_0009.002.IDT_i7_31---IDT_i5_31.AMNH17292_female_sorted.bam ../raw_data/temp7/NS.LH00147_0009.003.IDT_i7_31---IDT_i5_31.AMNH17292_female_sorted.bam
+```
