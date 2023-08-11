@@ -153,13 +153,13 @@ mv NS.LH00147_0009.001.IDT_i7_79---IDT_i5_79.CAS260425-pool_trim_R1.fq.gz NS.LH0
 
 ```
 mkdir bams_combined
-mkdir temp1
 ```
 
 check if there are 3 files with the name AMNH17292:
 `ls ../raw_data/*/*AMNH17292*` shows 12 files: 3 R1_trimmed, 3 R2_trimmed, 3 sorted.bam, and 3 sorted.bam.bai
 `ls ../raw_data/*/*AMNH17292*bam*` shows 6 files: 3 sorted.bam, and 3 sorted.bam.bai
 `ls ../raw_data/*/*AMNH17292*bam` shows 3 sorted.bam files
+`/*/` involves all folders in the `raw_data` folder (all `temp` folders)
 
 a script for merging:
 ```
@@ -185,3 +185,26 @@ the script execution:
 ```
 sbatch 2021_samtools_merge3.sh ../bams_combined/AMNH17292_female_sorted.bam ../raw_data/temp1/NS.LH00147_0009.001.IDT_i7_31---IDT_i5_31.AMNH17292_female_sorted.bam ../raw_data/temp4/NS.LH00147_0009.002.IDT_i7_31---IDT_i5_31.AMNH17292_female_sorted.bam ../raw_data/temp7/NS.LH00147_0009.003.IDT_i7_31---IDT_i5_31.AMNH17292_female_sorted.bam
 ```
+by the same way to merge all sorted.bam files 3 per one temp folder
+
+sbatch 2021_samtools_merge3.sh ../bams_combined/AMNH17295_female_sorted.bam ../raw_data/temp1/NS.LH00147_0009.001.IDT_i7_20---IDT_i5_20.AMNH17295_female_sorted.bam ../raw_data/temp4/NS.LH00147_0009.002.IDT_i7_20---IDT_i5_20.AMNH17295_female_sorted.bam ../raw_data/temp6/NS.LH00147_0009.003.IDT_i7_20---IDT_i5_20.AMNH17295_female_sorted.bam
+
+6) read groups
+
+sbatch 2022_picard_add_read_groups_and_index.sh ../bams_combined/AMNH17292_female_sorted
+
+7) call haplotype
+
+sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ../bams_combined/ Chr1L
+sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ../bams_combined/ Scaffolds
+sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ../bams_combined/ Chr9_10S
+sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ../bams_combined/temp1 Chr9_10S
+
+
+
+
+
+
+
+
+
