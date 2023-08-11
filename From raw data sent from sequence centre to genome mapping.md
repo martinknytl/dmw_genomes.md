@@ -185,7 +185,7 @@ the script execution:
 ```
 sbatch 2021_samtools_merge3.sh ../bams_combined/AMNH17292_female_sorted.bam ../raw_data/temp1/NS.LH00147_0009.001.IDT_i7_31---IDT_i5_31.AMNH17292_female_sorted.bam ../raw_data/temp4/NS.LH00147_0009.002.IDT_i7_31---IDT_i5_31.AMNH17292_female_sorted.bam ../raw_data/temp7/NS.LH00147_0009.003.IDT_i7_31---IDT_i5_31.AMNH17292_female_sorted.bam
 ```
-by the same way to merge all sorted.bam files 3 per one temp folder
+by the same way to merge all sorted.bam files
 
 sbatch 2021_samtools_merge3.sh ../bams_combined/AMNH17295_female_sorted.bam ../raw_data/temp1/NS.LH00147_0009.001.IDT_i7_20---IDT_i5_20.AMNH17295_female_sorted.bam ../raw_data/temp4/NS.LH00147_0009.002.IDT_i7_20---IDT_i5_20.AMNH17295_female_sorted.bam ../raw_data/temp6/NS.LH00147_0009.003.IDT_i7_20---IDT_i5_20.AMNH17295_female_sorted.bam
 
