@@ -187,8 +187,6 @@ sbatch 2021_samtools_merge3.sh ../bams_combined/AMNH17292_female_sorted.bam ../r
 ```
 by the same way to merge all sorted.bam files
 
-sbatch 2021_samtools_merge3.sh ../bams_combined/AMNH17295_female_sorted.bam ../raw_data/temp1/NS.LH00147_0009.001.IDT_i7_20---IDT_i5_20.AMNH17295_female_sorted.bam ../raw_data/temp4/NS.LH00147_0009.002.IDT_i7_20---IDT_i5_20.AMNH17295_female_sorted.bam ../raw_data/temp6/NS.LH00147_0009.003.IDT_i7_20---IDT_i5_20.AMNH17295_female_sorted.bam
-
 6) read groups
 
 sbatch 2022_picard_add_read_groups_and_index.sh ../bams_combined/AMNH17292_female_sorted
@@ -203,10 +201,7 @@ sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genom
 
 
 
-sbatch 2021_samtools_merge3.sh ../bams_combined/BJE1509-pool_female_sorted.bam ../raw_data/temp3/NS.LH00147_0009.001.IDT_i7_90---IDT_i5_90.BJE1509-pool_sorted.bam ../raw_data/temp6/NS.LH00147_0009.002.IDT_i7_90---IDT_i5_90.BJE1509-pool_sorted.bam ../raw_data/temp8/NS.LH00147_0009.003.IDT_i7_90---IDT_i5_90.BJE1509-pool_sorted.bam
-
-
-
+sbatch 2021_samtools_merge3.sh ../bams_combined/CAS260425-pool_female_sorted.bam ../raw_data/temp3/NS.LH00147_0009.001.IDT_i7_79---IDT_i5_79.CAS260425-pool_sorted.bam ../raw_data/temp5/NS.LH00147_0009.002.IDT_i7_79---IDT_i5_79.CAS260425-pool_sorted.bam ../raw_data/temp8/NS.LH00147_0009.003.IDT_i7_79---IDT_i5_79.CAS260425-pool_sorted.bam
 
 
 
