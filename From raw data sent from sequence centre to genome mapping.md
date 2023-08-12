@@ -203,6 +203,10 @@ sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genom
 
 
 
+sbatch 2021_samtools_merge3.sh ../bams_combined/BJE1509-pool_female_sorted.bam ../raw_data/temp3/NS.LH00147_0009.001.IDT_i7_90---IDT_i5_90.BJE1509-pool_sorted.bam ../raw_data/temp6/NS.LH00147_0009.002.IDT_i7_90---IDT_i5_90.BJE1509-pool_sorted.bam ../raw_data/temp8/NS.LH00147_0009.003.IDT_i7_90---IDT_i5_90.BJE1509-pool_sorted.bam
+
+
+
 
 
 
