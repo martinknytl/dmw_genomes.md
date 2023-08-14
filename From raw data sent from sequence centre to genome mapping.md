@@ -155,7 +155,7 @@ mv NS.LH00147_0009.001.IDT_i7_79---IDT_i5_79.CAS260425-pool_trim_R1.fq.gz NS.LH0
 mkdir bams_combined
 ```
 
-check if there are 3 files with the name AMNH17292:
+go to the `ben_scripts` folder and check if there are 3 files with the name AMNH17292:
 `ls ../raw_data/*/*AMNH17292*` shows 12 files: 3 R1_trimmed, 3 R2_trimmed, 3 sorted.bam, and 3 sorted.bam.bai
 `ls ../raw_data/*/*AMNH17292*bam*` shows 6 files: 3 sorted.bam, and 3 sorted.bam.bai
 `ls ../raw_data/*/*AMNH17292*bam` shows 3 sorted.bam files
@@ -198,10 +198,6 @@ sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genom
 sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ../bams_combined/ Chr9_10S
 sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ../bams_combined/temp1 Chr9_10S
 
-
-
-
-sbatch 2021_samtools_merge3.sh ../bams_combined/CAS260425-pool_female_sorted.bam ../raw_data/temp3/NS.LH00147_0009.001.IDT_i7_79---IDT_i5_79.CAS260425-pool_sorted.bam ../raw_data/temp5/NS.LH00147_0009.002.IDT_i7_79---IDT_i5_79.CAS260425-pool_sorted.bam ../raw_data/temp8/NS.LH00147_0009.003.IDT_i7_79---IDT_i5_79.CAS260425-pool_sorted.bam
 
 
 
