@@ -187,9 +187,42 @@ sbatch 2021_samtools_merge3.sh ../bams_combined/AMNH17292_female_sorted.bam ../r
 ```
 by the same way to merge all sorted.bam files
 
-6) read groups
+### 6) read groups usiing picard
 
+a script for read groups:
+
+```
+#!/bin/sh
+#SBATCH --job-name=readgroups
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=24:00:00
+#SBATCH --mem=8gb
+#SBATCH --output=readgroups.%J.out
+#SBATCH --error=readgroups.%J.err
+#SBATCH --account=def-ben
+
+# run by passing an argument like this
+# sbatch 2022_picard_add_read_groups.sh bamfile_prefix
+
+module load picard/2.23.3
+
+    java -jar $EBROOTPICARD/picard.jar AddOrReplaceReadGroups I=${1}.bam O=${1}_rg.bam RGID=4 RGLB=${1} RGPL=ILLUMINA RGPU=${1} RGSM=${1}
+
+module load StdEnv/2020 samtools/1.12
+samtools index ${1}_rg.bam
+```
+
+every single script is separetely executed:
+```
 sbatch 2022_picard_add_read_groups_and_index.sh ../bams_combined/AMNH17292_female_sorted
+sbatch 2022_picard_add_read_groups_and_index.sh ../bams_combined/AMNH17293_male_sorted
+sbatch 2022_picard_add_read_groups_and_index.sh ../bams_combined/AMNH17294_male_sorted
+```
+etc till 
+```
+sbatch 2022_picard_add_read_groups_and_index.sh ../bams_combined/Z23350_male_sorted
+```
 
 7) call haplotype
 
