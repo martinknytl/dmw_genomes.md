@@ -187,7 +187,7 @@ sbatch 2021_samtools_merge3.sh ../bams_combined/AMNH17292_female_sorted.bam ../r
 ```
 by the same way to merge all sorted.bam files
 
-### 6) read groups usiing picard
+### 6) read groups using picard
 
 a script for read groups:
 
@@ -261,8 +261,8 @@ sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genom
 sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ../bams_combined/ Chr9_10S
 sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ../bams_combined/temp1 Chr9_10S
 
+sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ../bams_combined/temp1/ Chr9_10S
 
-
-
+sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ../bams_combined/temp1/ Chr9_10S
 
 
