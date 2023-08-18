@@ -213,7 +213,7 @@ module load StdEnv/2020 samtools/1.12
 samtools index ${1}_rg.bam
 ```
 
-every single script is separetely executed:
+go to the `ben_scripts` folder and every single script is separetely executed:
 ```
 sbatch 2022_picard_add_read_groups_and_index.sh ../bams_combined/AMNH17292_female_sorted
 sbatch 2022_picard_add_read_groups_and_index.sh ../bams_combined/AMNH17293_male_sorted
@@ -224,7 +224,37 @@ etc till
 sbatch 2022_picard_add_read_groups_and_index.sh ../bams_combined/Z23350_male_sorted
 ```
 
-7) call haplotype
+### 7) call haplotype
+
+a script for read groups:
+```
+#!/bin/sh
+#SBATCH --job-name=HaplotypeCaller
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=96:00:00
+#SBATCH --mem=30gb
+#SBATCH --output=HaplotypeCaller.%J.out
+#SBATCH --error=HaplotypeCaller.%J.err
+#SBATCH --account=def-ben
+
+
+# This script will read in the *_sorted.bam file names in a directory, and 
+# make and execute the GATK command "RealignerTargetCreator" on these files. 
+
+# execute like this:
+# sbatch 2021_HaplotypeCaller.sh ref dir_of_bam chr
+# sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa bamfiledirectory chr
+
+module load nixpkgs/16.09 gatk/4.1.0.0
+
+for file in ${2}*_rg.bam
+do
+    gatk --java-options -Xmx24G HaplotypeCaller  -I ${file} -R ${1} -L ${3} -O ${file}_${3}.g.vcf -ERC GVCF
+done
+```
+
+from the `ben_scripts/` folder:
 
 sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ../bams_combined/ Chr1L
 sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ../bams_combined/ Scaffolds
