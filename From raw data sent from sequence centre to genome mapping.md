@@ -266,4 +266,9 @@ sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genom
 
 sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ../bams_combined/temp2/ Chr1L
 ```
+for faster coding, use loop. This is an example of haplotype caller execution for Chr1L-8L in temp8 folder:
+```
+for x in {1..8}; do sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ../bams_combined/temp8/ Chr$L; done
+```
+
 there are three files in each temp folder. Haplotype callet has to be done for each chromosome and scaffolds in each folder 
