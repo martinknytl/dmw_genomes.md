@@ -374,3 +374,4 @@ commandline="gatk --java-options -Xmx10G GenotypeGVCFs -R ${1} -V ${2}${3} -L ${
 4} -O ${2}${3}_${4}.vcf.gz"
 
 ${commandline}
+
