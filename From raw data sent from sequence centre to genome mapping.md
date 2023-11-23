@@ -272,3 +272,105 @@ for x in {1..6}; do sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben
 ```
 
 there are three files in each temp folder. Haplotype callet has to be done for each chromosome and scaffolds in each folder 
+
+### 8) CombineGVCFs
+
+```
+#!/bin/sh
+#SBATCH --job-name=CombineGVCFs
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=48:00:00
+#SBATCH --mem=24gb
+#SBATCH --output=CombineGVCFs.%J.out
+#SBATCH --error=CombineGVCFs.%J.err
+#SBATCH --account=def-ben
+
+
+# This script will read in the *.g.vcf file names in a directory, and 
+# make and execute the GATK command "GenotypeGVCFs" on these files. 
+
+# execute like this:
+# sbatch 2021_CombineGVCFs.sh /home/ben/projects/rrg-ben/ben/2020_XL_v9.2_refgenome/XENLA_9.2_genome.fa ./ Chr1L
+
+module load nixpkgs/16.09 gatk/4.1.0.0
+
+commandline="gatk --java-options -Xmx10G CombineGVCFs -R ${1}"
+for file in ${2}*${3}*g.vcf
+do
+    commandline+=" -V ${file}"
+done
+
+commandline+=" -L ${3} -O ${2}allsites_${3}.g.vcf.gz"
+
+${commandline}
+```
+
+### OR, if this does not work (which it didn't for everyone except fischbergi, probably because of many scaffolds in the reference genome) use GenomicsDBImport to combine
+
+```
+#!/bin/sh
+#SBATCH --job-name=GenomicsDBImport
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=60:00:00
+#SBATCH --mem=24gb
+#SBATCH --output=GenomicsDBImport.%J.out
+#SBATCH --error=GenomicsDBImport.%J.err
+#SBATCH --account=def-ben
+
+
+# This script will read in the *.g.vcf file names in a directory, and 
+# make and execute the GATK command "GenotypeGVCFs" on these files. 
+
+# execute like this:
+# sbatch 2021_GenomicsDBImport.sh /home/ben/projects/rrg-ben/ben/2020_XL_v9.2_re
+fgenome/XENLA_9.2_genome.fa /home/ben/projects/rrg-ben/ben/2020_GBS_muel_fish_al
+lo_cliv_laev/raw_data/cutaddapted_by_species_across_three_plates/clivii/vcf/ chr
+1L temp_path_and_dir db_path_and_dir_prefix
+
+module load nixpkgs/16.09 gatk/4.1.0.0
+
+commandline="gatk --java-options -Xmx20G GenomicsDBImport -R ${1}"
+for file in ${2}*g.vcf
+do
+    commandline+=" -V ${file}"
+done
+
+commandline+=" -L ${3} --tmp-dir=${4} --batch-size 50 --genomicsdb-workspace-pat
+h ${5}_${3}"
+
+${commandline}
+```
+
+I skipped this step for our largeni, clivii, and pygmaeus samples and performed the following one:
+
+### 9) If gvcfs were combined with CombineGVCFs, use this:
+
+```
+#!/bin/sh
+#SBATCH --job-name=GenotypeGVCFs
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=12:00:00
+#SBATCH --mem=12gb
+#SBATCH --output=GenotypeGVCFs.%J.out
+#SBATCH --error=GenotypeGVCFs.%J.err
+#SBATCH --account=def-ben
+
+
+# This script will read in the *.g.vcf file names in a directory, and 
+# make and execute the GATK command "GenotypeGVCFs" on these files. 
+
+# execute like this:
+# sbatch 2021_GenotypeGVCFs.sh /home/ben/projects/rrg-ben/ben/2020_XL_v9.2_refge
+nome/XENLA_9.2_genome.fa /home/ben/projects/rrg-ben/ben/2020_GBS_muel_fish_allo_
+cliv_laev/raw_data/cutaddapted_by_species_across_three_plates/clivii/ allsites.g
+vcf chr1L
+
+module load nixpkgs/16.09 gatk/4.1.0.0
+
+commandline="gatk --java-options -Xmx10G GenotypeGVCFs -R ${1} -V ${2}${3} -L ${
+4} -O ${2}${3}_${4}.vcf.gz"
+
+${commandline}
