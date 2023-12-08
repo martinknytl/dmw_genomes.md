@@ -291,7 +291,7 @@ there are three files in each temp folder. Haplotype callet has to be done for e
 # make and execute the GATK command "GenotypeGVCFs" on these files. 
 
 # execute like this:
-# sbatch 2021_CombineGVCFs.sh /home/ben/projects/rrg-ben/ben/2020_XL_v9.2_refgenome/XENLA_9.2_genome.fa ./ Chr1L
+# sbatch ../../ben_scripts/2021_CombineGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ Chr1L
 
 module load nixpkgs/16.09 gatk/4.1.0.0
 
@@ -363,11 +363,11 @@ I skipped this step for our largeni, clivii, and pygmaeus samples and performed 
 # make and execute the GATK command "GenotypeGVCFs" on these files. 
 
 # execute like this:
-# sbatch ../../ben_scripts/2021_GenotypeGVCFs.sh /home/ben/projects/rrg-ben/ben/2020_XL_v9.2_refge
-nome/XENLA_9.2_genome.fa ./ allsites.g
-vcf chr1L
+# sbatch ../../ben_scripts/2021_GenotypeGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ allsites.gvcf chr1L
 
 # ./ = /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/bams_combined/combined_GVCFs
+
+# or loop for chromosomes 1-8L: for x in {1..8}; do sbatch ../../ben_scripts/2021_GenotypeGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ allsites.gvcf Chr$x\L; done
 
 module load nixpkgs/16.09 gatk/4.1.0.0
 
