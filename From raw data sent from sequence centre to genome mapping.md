@@ -405,7 +405,7 @@ commandline="gatk --java-options -Xmx18G GenotypeGVCFs -R ${1} -V gendb://${2}_$
 ${commandline}
 ```
 
-### 10 VariantFiltration
+### 10) VariantFiltration
 
 ```
 #!/bin/sh
@@ -437,7 +437,7 @@ gatk --java-options -Xmx8G VariantFiltration -V ${1}\
     -O ${1}_filtered.vcf.gz
 ```
 
-### 11 SelectVariants
+### 11) SelectVariants
 
 ```
 #!/bin/sh
