@@ -281,7 +281,7 @@ there are three files in each temp folder. Haplotype callet has to be done for e
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --time=48:00:00
-#SBATCH --mem=24gb
+#SBATCH --mem=12gb
 #SBATCH --output=CombineGVCFs.%J.out
 #SBATCH --error=CombineGVCFs.%J.err
 #SBATCH --account=def-ben
@@ -363,10 +363,11 @@ I skipped this step for our largeni, clivii, and pygmaeus samples and performed 
 # make and execute the GATK command "GenotypeGVCFs" on these files. 
 
 # execute like this:
-# sbatch 2021_GenotypeGVCFs.sh /home/ben/projects/rrg-ben/ben/2020_XL_v9.2_refge
-nome/XENLA_9.2_genome.fa /home/ben/projects/rrg-ben/ben/2020_GBS_muel_fish_allo_
-cliv_laev/raw_data/cutaddapted_by_species_across_three_plates/clivii/ allsites.g
+# sbatch ../../ben_scripts/2021_GenotypeGVCFs.sh /home/ben/projects/rrg-ben/ben/2020_XL_v9.2_refge
+nome/XENLA_9.2_genome.fa ./ allsites.g
 vcf chr1L
+
+# ./ = /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/bams_combined/combined_GVCFs
 
 module load nixpkgs/16.09 gatk/4.1.0.0
 
