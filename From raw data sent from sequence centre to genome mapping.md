@@ -377,7 +377,7 @@ commandline="gatk --java-options -Xmx10G GenotypeGVCFs -R ${1} -V ${2}${3} -L ${
 ${commandline}
 ```
 
-## If gvcfs were combined using GenomicsDBImport use this:
+### If gvcfs were combined using GenomicsDBImport use this:
 
 ```
 #!/bin/sh
@@ -403,4 +403,63 @@ commandline="gatk --java-options -Xmx18G GenotypeGVCFs -R ${1} -V gendb://${2}_$
 {3} -O ${2}_${3}_out.vcf"
 
 ${commandline}
+```
+
+### VariantFiltration
+
+```
+#!/bin/sh
+#SBATCH --job-name=VariantFiltration
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=36:00:00
+#SBATCH --mem=10gb
+#SBATCH --output=VariantFiltration.%J.out
+#SBATCH --error=VariantFiltration.%J.err
+#SBATCH --account=def-ben
+
+
+# This script will execute the GATK command "VariantFiltration" on a gvcf file
+
+# execute like this:
+# sbatch 2021_VariantFiltration.sh path_and_file
+
+module load nixpkgs/16.09 gatk/4.1.0.0
+
+gatk --java-options -Xmx8G VariantFiltration -V ${1}\
+    -filter "QD < 2.0" --filter-name "QD2" \
+    -filter "QUAL < 30.0" --filter-name "QUAL30" \
+    -filter "SOR > 3.0" --filter-name "SOR3" \
+    -filter "FS > 60.0" --filter-name "FS60" \
+    -filter "MQ < 40.0" --filter-name "MQ40" \
+    -filter "MQRankSum < -12.5" --filter-name "MQRankSum-12.5" \
+    -filter "ReadPosRankSum < -8.0" --filter-name "ReadPosRankSum-8" \
+    -O ${1}_filtered.vcf.gz
+```
+
+### SelectVariants
+
+```
+#!/bin/sh
+#SBATCH --job-name=SelectVariants
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=36:00:00
+#SBATCH --mem=10gb
+#SBATCH --output=SelectVariants.%J.out
+#SBATCH --error=SelectVariants.%J.err
+#SBATCH --account=def-ben
+
+
+# This script will execute the GATK command "SelectVariants" on a file
+
+# execute like this:
+# sbatch 2021_SelectVariants.sh pathandfile
+
+module load nixpkgs/16.09 gatk/4.1.0.0
+
+gatk --java-options -Xmx8G SelectVariants \
+        --exclude-filtered \
+        -V ${1} \
+        -O ${1}_filtered_removed.vcf
 ```
