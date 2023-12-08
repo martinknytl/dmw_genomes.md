@@ -375,4 +375,32 @@ commandline="gatk --java-options -Xmx10G GenotypeGVCFs -R ${1} -V ${2}${3} -L ${
 4} -O ${2}${3}_${4}.vcf.gz"
 
 ${commandline}
+```
 
+## If gvcfs were combined using GenomicsDBImport use this:
+
+```
+#!/bin/sh
+#SBATCH --job-name=GenotypeGVCFs
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=12:00:00
+#SBATCH --mem=23gb
+#SBATCH --output=GenotypeGVCFs.%J.out
+#SBATCH --error=GenotypeGVCFs.%J.err
+#SBATCH --account=def-ben
+
+
+# This script will read in the *.g.vcf file names in a directory, and 
+# make and execute the GATK command "GenotypeGVCFs" on these files. 
+
+# execute like this:
+# sbatch 2021_GenotypeGVCFs_DB.sh ref DB_path chr1L
+
+module load nixpkgs/16.09 gatk/4.1.0.0
+
+commandline="gatk --java-options -Xmx18G GenotypeGVCFs -R ${1} -V gendb://${2}_$
+{3} -O ${2}_${3}_out.vcf"
+
+${commandline}
+```
