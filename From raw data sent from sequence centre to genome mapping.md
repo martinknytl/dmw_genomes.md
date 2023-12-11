@@ -363,11 +363,11 @@ I skipped this step for our largeni, clivii, and pygmaeus samples and performed 
 # make and execute the GATK command "GenotypeGVCFs" on these files. 
 
 # execute like this:
-# sbatch ../../ben_scripts/2021_GenotypeGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ allsites.gvcf chr1L
+# sbatch ../../ben_scripts/2021_GenotypeGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ allsites_Chr1L.g.vcf.gz Chr1L
 
 # ./ = /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/bams_combined/combined_GVCFs
 
-# or loop for chromosomes 1-8L: for x in {1..8}; do sbatch ../../ben_scripts/2021_GenotypeGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ allsites.gvcf Chr$x\L; done
+# or loop for chromosomes 1-8L: for x in {1..8}; do sbatch ../../ben_scripts/2021_GenotypeGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ allsites_Chr$x\L.gvcf.gz Chr$x\L; done
 
 module load nixpkgs/16.09 gatk/4.1.0.0
 
