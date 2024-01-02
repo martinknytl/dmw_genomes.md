@@ -458,6 +458,9 @@ gatk --java-options -Xmx8G VariantFiltration -V ${1}\
 
 # execute like this:
 # sbatch 2021_SelectVariants.sh pathandfile
+# example of loop: for x in {1..8}; do sbatch ../../ben_scripts/2021_SelectVariants.sh ./allsites_Chr$x\L.g.vcf.gz_Chr$x\L.vcf.gz_filtered.vcf.gz; done
+# no loop: sbatch ../../ben_scripts/2021_SelectVariants.sh ./allsites_Chr9_10L.g.vcf.gz_Chr9_10L.vcf.gz_filtered.vcf.gz
+
 
 module load nixpkgs/16.09 gatk/4.1.0.0
 
