@@ -423,6 +423,9 @@ ${commandline}
 
 # execute like this:
 # sbatch 2021_VariantFiltration.sh path_and_file
+# for example: sbatch ../../ben_scripts/2021_VariantFiltration.sh ./allsites_Chr2L.g.vcf.gz_Chr2L.vcf.gz
+# ./ = /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/bams_combined/variant_Filtration
+
 
 module load nixpkgs/16.09 gatk/4.1.0.0
 
