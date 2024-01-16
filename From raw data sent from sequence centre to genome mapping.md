@@ -477,3 +477,31 @@ module load StdEnv/2020 vcftools/0.1.16
 zcat file.vcf.gz | vcf-to-tab > out.tab
 ```
 
+```
+#!/bin/sh
+#SBATCH --job-name=vcf-to-tab
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=12:00:00
+#SBATCH --mem=10gb
+#SBATCH --output=vcf-to-tab.%J.out
+#SBATCH --error=vcf-to-tab.%J.err
+#SBATCH --account=def-ben
+
+
+# This script will execute zcat file.vcf.gz | vcf-to-tab > out.tab
+# sbatch 2023_vcf-to-tab.sh 
+
+module load StdEnv/2020 vcftools/0.1.16
+
+# loop:
+for x in {1..8}; do sbatch ../../ben_scripts/2023_vcf-to-tab.sh zcat allsites_Chrx\L.g.vcf.gz_Chrx\L.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chrx\L.tab; done
+
+for x in {1..8}; do sbatch ../../ben_scripts/2023_vcf-to-tab.sh zcat allsites_Chrx\S.g.vcf.gz_Chrx\S.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chrx\S.tab; done
+
+# no loop: sbatch ../../ben_scripts/2021_SelectVariants.sh zcat allsites_Chr9_10L.g.vcf.gz_Chr9_10L.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chr9_10L.tab
+
+zcat allsites_Chr9_10L.g.vcf.gz_Chr9_10L.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chr9_10L.tab
+
+
+```
