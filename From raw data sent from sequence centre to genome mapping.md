@@ -469,3 +469,11 @@ gatk --java-options -Xmx8G SelectVariants \
         -V ${1} \
         -O ${1}_filtered_removed.vcf
 ```
+
+### 12) to make tab delimited files out of the genotype files (gvcf files)
+
+```
+module load StdEnv/2020 vcftools/0.1.16
+zcat file.vcf.gz | vcf-to-tab > out.tab
+```
+
