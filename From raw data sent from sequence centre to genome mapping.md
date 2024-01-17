@@ -490,7 +490,7 @@ zcat file.vcf.gz | vcf-to-tab > out.tab
 
 
 # This script will execute zcat file.vcf.gz | vcf-to-tab > out.tab
-# sbatch 2023_vcf-to-tab.sh 
+# sbatch 2024_vcf-to-tab.sh 
 
 module load StdEnv/2020 vcftools/0.1.16
 
