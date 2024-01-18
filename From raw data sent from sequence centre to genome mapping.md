@@ -477,10 +477,7 @@ gatk --java-options -Xmx8G SelectVariants \
 
 ### 12) to make tab delimited files out of the genotype files (gvcf files)
 
-```
-module load StdEnv/2020 vcftools/0.1.16
-zcat file.vcf.gz | vcf-to-tab > out.tab
-```
+Script for the L chromosomes:
 
 ```
 #!/bin/sh
@@ -495,18 +492,44 @@ zcat file.vcf.gz | vcf-to-tab > out.tab
 
 
 # This script will execute zcat file.vcf.gz | vcf-to-tab > out.tab
-# sbatch 2024_vcf-to-tab.sh 
+# sbatch 2024_vcf-to-tab_for_chrL.sh 
 
 module load StdEnv/2020 vcftools/0.1.16
 
 # loop:
-for x in {1..8}; do sbatch ../../ben_scripts/2023_vcf-to-tab.sh zcat allsites_Chrx\L.g.vcf.gz_Chrx\L.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chrx\L.tab; done
 
-for x in {1..8}; do sbatch ../../ben_scripts/2023_vcf-to-tab.sh zcat allsites_Chrx\S.g.vcf.gz_Chrx\S.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chrx\S.tab; done
+for x in {1..8}; do zcat allsites_Chr$x\L.g.vcf.gz_Chr$x\L.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chr$x\L.tab; done
 
-# no loop: sbatch ../../ben_scripts/2021_SelectVariants.sh zcat allsites_Chr9_10L.g.vcf.gz_Chr9_10L.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chr9_10L.tab
+# no loop: 
 
 zcat allsites_Chr9_10L.g.vcf.gz_Chr9_10L.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chr9_10L.tab
+```
+
+Script for the S chromosomes:
+
+```#!/bin/sh
+#SBATCH --job-name=vcf-to-tab
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=12:00:00
+#SBATCH --mem=10gb
+#SBATCH --output=vcf-to-tab.%J.out
+#SBATCH --error=vcf-to-tab.%J.err
+#SBATCH --account=def-ben
+
+
+# This script will execute zcat file.vcf.gz | vcf-to-tab > out.tab
+# sbatch 2024_vcf-to-tab_for_chrS.sh 
+
+module load StdEnv/2020 vcftools/0.1.16
+
+# loop:
+
+for x in {1..8}; do zcat allsites_Chr$x\S.g.vcf.gz_Chr$x\S.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chr$x\S.tab; done
+
+# no loop: 
+
+zcat allsites_Chr9_10S.g.vcf.gz_Chr9_10S.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chr9_10S.tab
 ```
 
 ### 13) Searching for sex-specific heterozygous positions
