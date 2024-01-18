@@ -507,20 +507,9 @@ for x in {1..8}; do sbatch ../../ben_scripts/2023_vcf-to-tab.sh zcat allsites_Ch
 # no loop: sbatch ../../ben_scripts/2021_SelectVariants.sh zcat allsites_Chr9_10L.g.vcf.gz_Chr9_10L.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chr9_10L.tab
 
 zcat allsites_Chr9_10L.g.vcf.gz_Chr9_10L.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chr9_10L.tab
-
-
 ```
-
-
 
 ### 13) Searching for sex-specific heterozygous positions
-
-First make tab delimited files out of the genotype files (gvcf files)
-
-```
-module load StdEnv/2020 vcftools/0.1.16
-zcat file.vcf.gz | vcf-to-tab > out.tab
-```
 
 For sex-linked regions, we expect divergence in the heterogametic sex and not the homogametic sex. We can identify these sites and map them.  
 
