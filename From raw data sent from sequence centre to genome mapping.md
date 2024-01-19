@@ -566,6 +566,10 @@ use List::MoreUtils qw/ uniq /;
 # where 1111100110000111100011100110010100002200 refers to whether or not each individual in the ingroup 
 # in the vcf file is (0) male, (1) female, and or (2) skipped
 
+# the order of samples in each file can be checked using:
+# `head -n1 Chr1L.tab` for Chr1 file tab file
+# or `zcat allsites_Chr1L.g.vcf.gz_Chr1L.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | grep '#CHR'` for gz file
+
 # proportion is the proportion of genotyped alleles in the heterogametic sex that are required to be
 # different from the homogametic sex in order for the position to be reported.  This is a way to reduce reporting
 # of low frequency polymorphisms (which are unlikely to be sex-linked but likely to have one sex all homozygous).
