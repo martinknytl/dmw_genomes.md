@@ -536,6 +536,50 @@ zcat allsites_Chr9_10S.g.vcf.gz_Chr9_10S.vcf.gz_filtered.vcf.gz_filtered_removed
 
 For sex-linked regions, we expect divergence in the heterogametic sex and not the homogametic sex. We can identify these sites and map them.  
 
+the command `more combined_Chr1L.g.vcf.gz_Chr1L_SNPs.vcf.gz.tab` gave me these result:
+```
+../2023_clp_for_real/bams_combined/cliv_female_260423	../2023_clp_for_real/bams_combined/cliv_female_CAS260421	../2023_clp_for_real/bams_combined/cliv_female_CAS260422	../2023_clp_for_real/bams_combined/cliv_female_CAS260425	../2023_clp_
+for_real/bams_combined/cliv_female_Cas260390	../2023_clp_for_real/bams_combined/cliv_male_CAS262409	../2023_clp_for_real/bams_combined/c
+liv_male_CAS262486	../2023_clp_for_real/bams_combined/cliv_male_CAS262487	../2023_clp_for_real/bams_combined/cliv_male_Cas260426	../2
+023_clp_for_real/bams_combined/cliv_male_Cas262488	../2023_clp_for_real/bams_combined/larg_female_AMNH17292	../2023_clp_for_real
+/bams_combined/larg_female_AMNH17295	../2023_clp_for_real/bams_combined/larg_female_BJE1505	../2023_clp_for_real/bams_combined/larg_fema
+le_BJE1509	../2023_clp_for_real/bams_combined/larg_female_XEN170	../2023_clp_for_real/bams_combined/larg_male_AMNH17293	../2023_clp_
+for_real/bams_combined/larg_male_AMNH17294	../2023_clp_for_real/bams_combined/larg_male_BJE1506	../2023_clp_for_real/bams_combined/l
+arg_male_BJE1507	../2023_clp_for_real/bams_combined/larg_male_BJE1508	../2023_clp_for_real/bams_combined/pygm_female_Z23338	../2
+023_clp_for_real/bams_combined/pygm_female_Z23340	../2023_clp_for_real/bams_combined/pygm_female_Z23341	../2023_clp_for_real/bams_co
+mbined/pygm_female_Z23342	../2023_clp_for_real/bams_combined/pygm_male_Z23337	../2023_clp_for_real/bams_combined/pygm_male_Z23339../2023_clp_for_real/bams_combined/pygm_male_Z23349	../2023_clp_for_real/bams_combined/pygm_male_Z23350
+```
+Now I know the order of samples and sex of each sample:
+
+1. cliv_female_260423
+2. cliv_female_CAS260421
+3. cliv_female_CAS260422
+4. cliv_female_CAS260425
+5. cliv_female_Cas260390
+6. cliv_male_CAS262409
+7. cliv_male_CAS262486
+8. cliv_male_CAS262487
+9. cliv_male_Cas260426
+10. cliv_male_Cas262488
+11. larg_female_AMNH17292
+12. larg_female_AMNH17295
+13. larg_female_BJE1505
+14. larg_female_BJE1509
+15. larg_female_XEN170
+16. larg_male_AMNH17293
+17. larg_male_AMNH17294
+18. larg_male_BJE1506
+19. larg_male_BJE1507
+20. larg_male_BJE1508
+21. pygm_female_Z23338
+22. pygm_female_Z23340
+23. pygm_female_Z23341
+24. pygm_female_Z23342
+25. pygm_male_Z23337
+26. pygm_male_Z23339
+27. pygm_male_Z23349
+28. pygm_male_Z23350
+
 Here is a perl script that will look for these sites in a tab delimited file:
 ```perl #!/usr/bin/env perl
 #!/usr/bin/env perl
