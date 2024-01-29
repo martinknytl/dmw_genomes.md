@@ -606,6 +606,11 @@ script for chr 9_10L:
 perl ../../ben_scripts/Parse_tab.pl combined_Chr9_10L.g.vcf.gz_Chr9_10L_SNPs.vcf.gz.tab 1111100000222222222222222222 cliv_Chr9_10L.out 0.5
 ```
 
+script for scaffolds:
+
+```
+perl ../../ben_scripts/Parse_tab.pl combined_Scaffolds.g.vcf.gz_Scaffolds_GenotypedSNPs.vcf.gz.tab 1111100000222222222222222222 cliv_Scaffolds.out 0.5
+```
 
 
 Here is a perl script that will look for these sites in a tab delimited file:
