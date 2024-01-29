@@ -583,7 +583,9 @@ Now I know the order of samples and sex of each sample:
 modules and instalation:
 
 `module load perl/5.30.2`
+
 `module load gcc/9.3.0`
+
 `cpan` after open the cpan shell, copy `install List::MoreUtils`
 
 
