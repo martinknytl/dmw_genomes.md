@@ -580,6 +580,13 @@ Now I know the order of samples and sex of each sample:
 27. pygm_male_Z23349
 28. pygm_male_Z23350
 
+modules and instalation:
+
+`module load perl/5.30.2`
+`module load gcc/9.3.0`
+`cpan` after open the cpan shell, copy `install List::MoreUtils`
+
+
 Here is a perl script that will look for these sites in a tab delimited file:
 ```perl #!/usr/bin/env perl
 #!/usr/bin/env perl
