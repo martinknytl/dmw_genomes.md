@@ -594,6 +594,19 @@ modules and instalation:
 
 `cpan` after open the cpan shell, copy `install List::MoreUtils`
 
+Loop for perl script and chromosomes 5L-8L:
+
+```
+for x in {5..8}; do  perl ../../ben_scripts/Parse_tab.pl combined_Chr$x\L.g.vcf.gz_Chr$x\L_SNPs.vcf.gz.tab 1111100000222222222222222222 cliv_Chr$x\L.out 0.5; done
+```
+
+script for chr 9_10L:
+
+```
+perl ../../ben_scripts/Parse_tab.pl combined_Chr9_10L.g.vcf.gz_Chr9_10L_SNPs.vcf.gz.tab 1111100000222222222222222222 cliv_Chr9_10L.out 0.5
+```
+
+
 
 Here is a perl script that will look for these sites in a tab delimited file:
 ```perl #!/usr/bin/env perl
