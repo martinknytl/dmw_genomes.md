@@ -549,6 +549,12 @@ arg_male_BJE1507	../2023_clp_for_real/bams_combined/larg_male_BJE1508	../2023_cl
 023_clp_for_real/bams_combined/pygm_female_Z23340	../2023_clp_for_real/bams_combined/pygm_female_Z23341	../2023_clp_for_real/bams_co
 mbined/pygm_female_Z23342	../2023_clp_for_real/bams_combined/pygm_male_Z23337	../2023_clp_for_real/bams_combined/pygm_male_Z23339../2023_clp_for_real/bams_combined/pygm_male_Z23349	../2023_clp_for_real/bams_combined/pygm_male_Z23350
 ```
+Also, the order of samples in each file can be checked using:
+
+`head -n1 Chr1L.tab` for Chr1 file tab file
+
+or `zcat allsites_Chr1L.g.vcf.gz_Chr1L.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | grep '#CHR'` for gz file
+
 Now I know the order of samples and sex of each sample:
 
 1. cliv_female_260423
@@ -618,10 +624,6 @@ use List::MoreUtils qw/ uniq /;
 # to execute type Parse_tab.pl inputfile.tab 1111100110000111100011100110010100002200 interesting_sites.out proportion
 # where 1111100110000111100011100110010100002200 refers to whether or not each individual in the ingroup 
 # in the vcf file is (0) male, (1) female, and or (2) skipped
-
-# the order of samples in each file can be checked using:
-# `head -n1 Chr1L.tab` for Chr1 file tab file
-# or `zcat allsites_Chr1L.g.vcf.gz_Chr1L.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | grep '#CHR'` for gz file
 
 # proportion is the proportion of genotyped alleles in the heterogametic sex that are required to be
 # different from the homogametic sex in order for the position to be reported.  This is a way to reduce reporting
