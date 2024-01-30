@@ -594,10 +594,10 @@ modules and instalation:
 
 `cpan` after open the cpan shell, copy `install List::MoreUtils`
 
-Loop for perl script and chromosomes 5L-8L:
+Loop for perl script and chromosomes 1L-8L:
 
 ```
-for x in {5..8}; do  perl ../../ben_scripts/Parse_tab.pl combined_Chr$x\L.g.vcf.gz_Chr$x\L_SNPs.vcf.gz.tab 1111100000222222222222222222 cliv_Chr$x\L.out 0.5; done
+for x in {1..8}; do  perl ../../ben_scripts/Parse_tab.pl combined_Chr$x\L.g.vcf.gz_Chr$x\L_SNPs.vcf.gz.tab 1111100000222222222222222222 cliv_Chr$x\L.out 0.5; done
 ```
 
 script for chr 9_10L:
