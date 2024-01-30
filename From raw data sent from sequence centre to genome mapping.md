@@ -612,6 +612,14 @@ script for scaffolds:
 perl ../../ben_scripts/Parse_tab.pl combined_Scaffolds.g.vcf.gz_Scaffolds_GenotypedSNPs.vcf.gz.tab 1111100000222222222222222222 cliv_Scaffolds.out 0.5
 ```
 
+concatenate all chromosomes and scaffolds to one file:
+
+```
+for x in {1..8}; do cat cliv_Chr$x\L.out; done > cliv_all_chrom.out
+for x in {1..8}; do cat cliv_Chr$x\S.out; done > cliv_1-8S_chrom.out
+cat cliv_1-8L_chrom.out cliv_1-8S_chrom.out cliv_Chr9_10L.out cliv_Chr9_10S.out cliv_Scaffolds.out > cliv_all_chr.out
+```
+
 
 Here is a perl script that will look for these sites in a tab delimited file:
 ```perl #!/usr/bin/env perl
