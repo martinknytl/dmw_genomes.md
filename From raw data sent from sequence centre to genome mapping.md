@@ -615,10 +615,12 @@ perl ../../ben_scripts/Parse_tab.pl combined_Scaffolds.g.vcf.gz_Scaffolds_Genoty
 concatenate all chromosomes and scaffolds to one file:
 
 ```
-for x in {1..8}; do cat cliv_Chr$x\L.out; done > cliv_all_chrom.out
+for x in {1..8}; do cat cliv_Chr$x\L.out; done > cliv_1-8L_chrom.out
 for x in {1..8}; do cat cliv_Chr$x\S.out; done > cliv_1-8S_chrom.out
 cat cliv_1-8L_chrom.out cliv_1-8S_chrom.out cliv_Chr9_10L.out cliv_Chr9_10S.out cliv_Scaffolds.out > cliv_all_chr.out
 ```
+
+move 'cliv_all_chr.out' to the Google Disk where R is installed.
 
 
 Here is a perl script that will look for these sites in a tab delimited file:
