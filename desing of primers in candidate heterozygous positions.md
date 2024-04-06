@@ -14,9 +14,3 @@ blastdbcmd -entry all -range 136504257-136504516 -db ../../laevis_genome/XENLA_1
 
 the code gave me extractions from each chromosome. So I opend the output file in vi using `vi candidate_sex_locus_slc26a7.L+UTR_exon1.fa` and removed all sequences but Chr6L. 
 
-
-
-one of candidates regions is 42296253-42296435 of slco3a1.S gene located on Chr3S of X. largeni. This region corresponds to the 5'UTR and start of coding region of slc26a7.L in X. laevis. Using the code:
-
-
-blastdbcmd -entry all -range 42296253-42296435 -db ../../laevis_genome/XENLA_10.1_genome.fa_blastable -out candidate_sex_locus.fa
