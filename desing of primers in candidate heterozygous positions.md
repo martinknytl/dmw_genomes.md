@@ -14,3 +14,13 @@ blastdbcmd -entry all -range 136504257-136504516 -db ../../laevis_genome/XENLA_1
 
 the code gave me extractions from each chromosome. So I opend the output file in vi using `vi candidate_sex_locus_slc26a7.L+UTR_exon1.fa` and removed all sequences but Chr6L. 
 
+I used the same laevis coordinates for the trop genome but the corresponding region has no gene there. slc26a7 gene is 10 Mbp upstream. Therefore I used `blastn` to search homologous trop sequence:
+
+```
+blastn -query candidate_sex_locus_slc26a7.L+UTR_exon1.fa -db /home/knedlo/projects/rrg-ben/knedlo/tropicalis_genome/XENTR_10.0_genome.fa_blastable -outfmt 6 -out candidate_sex_locus_slc26a7.L+UTR_exon1.fa_to_XT
+```
+
+I opened the output result using `more candidate_sex_locus_slc26a7.L+UTR_exon1.fa_to_XT` and see this: `:136504257-136504516	Chr6	84.277	159	18	4	1	159	126806460	126806611	3.00e-34	148`. trop coordinates are 126806460-126806611.
+
+I went to xenbase and added 126806460-126806611 for search and the result whowed me the trop 5'UTR region
+
