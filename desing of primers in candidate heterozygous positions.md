@@ -1,3 +1,5 @@
+## Xenopus tropicalis, X. laevis
+
 I selected a position in largeni genome (all_larg_Sex_specific_heterozygosity.txt) that is heterozygous in all females and homozygous in all males
 
 I Added candidate coordinates to the laevis genome on the web site https://www.xenbase.org/xenbase/displayJBrowse.do?data=data/xl10_1 and "go"
@@ -41,3 +43,30 @@ scp knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/2023_cli
 `.` is `/Users/martinknytl/Google Drive/My Drive/pracovni_slozka/vyzkum/xenopus/clivii_largeni_pygmaeus/heterozygous_positions/largeni_candidate_sex_loci/candicate_loci_from_Xenbase`
 
 trop and laevis sequences aligned in Geneious, primer designed in the conserved regions for both species
+
+## Xenopus borealis
+
+borealis genome has not graphical search such as trop and laevis and thus an approach of sequence extraction is a bit different than in trop and laevis
+
+blastn -query xlae_slco3a1.S.fa -db ../../borealis_genome/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out xlae_slco3a1.S_to_xb
+
+Search of the slco3a1.S gene in borealis genome:
+
+```
+blastn -query xlae_slco3a1.S.fa -db ../../borealis_genome/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out xlae_slco3a1.S_to_xb
+```
+
+The best bit score is a region 8S:15341892-15343716 (1829 bp). I need to extract this region from blastable database in fasta. This region is candidate region for sex determination in X. largeni and it is gene slco3a1.S
+
+```
+blastdbcmd -entry all -range 15341892-15343716 -db ../../borealis_genome/Xbo.v1_chrs_and_concatscafs_blastable -out xxx.fa
+```
+
+<all>: The identifier of the entire sequence you want to extract.
+<15341892> and <15343716>: The start and end positions of the region you wish to extract.
+<Xbo.v1_chrs_and_concatscafs_blastable>: The name of your database.
+<xxx.fa>: The desired output filename.
+
+The command extracted 15341892-15343716 positions from each chromosomes. So then open `vi xxx.fa` and remove all sequences that we do not need
+
+file renamed as using vi `xbo_slco3a1.S.fa`
