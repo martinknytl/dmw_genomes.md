@@ -65,6 +65,20 @@ blastdbcmd -entry all -range 15341892-15343716 -db ../../borealis_genome/Xbo.v1_
 <all>: The identifier of the entire sequence you want to extract.
 <15341892> and <15343716>: The start and end positions of the region you wish to extract.
 <Xbo.v1_chrs_and_concatscafs_blastable>: The name of your database.
+
+## extraction of coding sequences for variable positions that have the best hit 5/5
+
+print rows with the best hit (5/5)
+
+```
+awk '$(NF-1) >= 5 && $NF >= 5 {print}' all_larg_Sex_specific_heterozygosity.txt > all_larg_Sex_specific_heterozygosity_5_5_only.txt
+```
+
+from the txt file (all_larg_Sex_specific_heterozygosity_5_5_only.txt) print rows, which has value in the column 2 in between values of columns 4 and 5 in the gff file (XENLA_10.1_Xenbase_longest_CDSonly.gff)
+
+awk -F $'\t' ' { if ($4 > $5) {t = $4; $4 = $5; $5 = t; print; } } ' OFS=$'\t' XENLA_10.1_Xenbase_longest_CDSonly.gff  > XENLA_10.1_Xenbase_longest_CDSonly_swap.txt
+awk -F $'\t' ' { if ($4 < $5) {print; } } ' OFS=$'\t' XENLA_10.1_Xenbase_longest_CDSonly.gff  > XENLA_10.1_Xenbase_longest_CDSonly_nonswap.txt
+awk '{print}' XTlongCDS_to_XL_Ssubgenome_nonswap.txt XTlongCDS_to_XL_Ssubgenome_swap.txt > XTlongCDS_to_XL_Ssubgenome_final.txt
 <xxx.fa>: The desired output filename.
 
 The command extracted 15341892-15343716 positions from each chromosomes. So then open `vi xxx.fa` and remove all sequences that we do not need
