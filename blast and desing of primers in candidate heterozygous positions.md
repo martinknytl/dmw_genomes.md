@@ -75,7 +75,7 @@ file renamed as using vi `xbo_slco3a1.S.fa`
 print rows with the best hit (5/5)
 
 ```
-awk '$(NF-1) >= 5 && $NF >= 5 {print}' all_larg_Sex_specific_heterozygosity.txt > all_larg_Sex_specific_heterozygosity_5_5_only.txt
+awk '$(NF-1) >= 4 && $NF >= 4 {print}' all_larg_Sex_specific_heterozygosity.txt > all_larg_Sex_specific_heterozygosity_4_4_and_higher.txt
 ```
 
 THIS DOES NOT WORK: from the txt file (all_larg_Sex_specific_heterozygosity_5_5_only.txt) print rows, which has value in the column 2 in between values of columns 4 and 5 in the gff file (XENLA_10.1_Xenbase_longest_CDSonly.gff)
@@ -89,4 +89,12 @@ awk '{print}' XTlongCDS_to_XL_Ssubgenome_nonswap.txt XTlongCDS_to_XL_Ssubgenome_
 ```
 awk 'FNR==NR {min=$4; max=$5; next} $2 >= min && $2 <= max {print}' XENLA_10.1_Xenbase_longest_CDSonly.gff all_larg_Sex_specific_heterozygosity_5_5_only.txt > exons.txt
 ```
+```
 awk 'NR==FNR {min[$1]=$4; max[$1]=$5; next} $2 >= min[$2] && $2 <= max[$2]' XENLA_10.1_Xenbase_longest_CDSonly.gff all_larg_Sex_specific_heterozygosity_5_5_only.txt > exons.txt
+```
+```
+cut -f1,2,3,4,5,6,7,8 XENLA_10.1_Xenbase_longest_CDSonly.gff > XENLA_10.1_Xenbase_longest_CDSonly_cut.txt
+```
+```
+awk -F $'\t' ' { if ($4 > $5) {t = $4; $4 = $5; $5 = t; print; } } ' OFS=$'\t' XENLA_10.1_Xenbase_longest_CDSonly_cut.txt  > 1_Xenbase_longest_CDSonly_cut_swap.txt
+```
