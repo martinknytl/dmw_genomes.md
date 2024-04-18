@@ -55,7 +55,8 @@ blastdbcmd -entry all -range 2881130-2881853 -db /home/knedlo/projects/rrg-ben/k
 
 the code gave me extractions from each chromosome. So I opend the output file in vi using `vi candidate_sex_locus_LOC121395205_trop_exon.fa` and removed all sequences but Chr6.
 
-Sequence can be directly copied to Geneious
+Sequence can be directly copied to Geneious, annotate exons and design primers in the conserved regions for both species.
+
 
 Another way is:
 I used the same laevis coordinates for the trop genome but the corresponding region has no gene there. slc26a7 gene is 10 Mbp upstream. Therefore I used `blastn` to search homologous trop sequence:
@@ -83,8 +84,6 @@ scp knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/2023_cli
 ```
 
 `.` is `/Users/martinknytl/Google Drive/My Drive/pracovni_slozka/vyzkum/xenopus/clivii_largeni_pygmaeus/heterozygous_positions/largeni_candidate_sex_loci/candicate_loci_from_Xenbase`
-
-trop and laevis sequences aligned in Geneious, primer designed in the conserved regions for both species
 
 ## Xenopus borealis
 
