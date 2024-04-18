@@ -51,7 +51,7 @@ I used the same laevis coordinates for the trop genome but the corresponding reg
 blastn -query candidate_sex_locus_slc26a7.L+UTR_exon1.fa -db /home/knedlo/projects/rrg-ben/knedlo/tropicalis_genome/XENTR_10.0_genome.fa_blastable -outfmt 6 -out candidate_sex_locus_slc26a7.L+UTR_exon1.fa_to_XT
 ```
 
-(faster option is to use copy the sequence extracted from the laevis genome to the Blast on Xenbase)
+(faster option is to copy the sequence extracted from the laevis genome to the Blast on Xenbase)
 
 I opened the output result using `more candidate_sex_locus_slc26a7.L+UTR_exon1.fa_to_XT` and see this: `:136504257-136504516	Chr6	84.277	159	18	4	1	159	126806460	126806611	3.00e-34	148`. trop coordinates are 126806460-126806611.
 
