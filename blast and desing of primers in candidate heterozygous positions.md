@@ -27,7 +27,7 @@ cut -f1,2,3,4,5,6,7,8 XENLA_10.1_Xenbase_longest_CDSonly.gff > XENLA_10.1_Xenbas
 awk -F $'\t' ' { if ($4 > $5) {t = $4; $4 = $5; $5 = t; print; } } ' OFS=$'\t' XENLA_10.1_Xenbase_longest_CDSonly_cut.txt  > 1_Xenbase_longest_CDSonly_cut_swap.txt
 ```
 
-## Xenopus tropicalis, X. laevis
+## Xenopus laevis
 
 I selected a positions in largeni genome (all_larg_Sex_specific_heterozygosity.txt) that is heterozygous in all females and homozygous in all males in exonic region. If there are at least 5 variable positions within a locus
 
@@ -43,15 +43,26 @@ one of candidates regions is 136504257-136504516 of slc26a7.L gene located on Ch
 blastdbcmd -entry all -range 136504257-136504516 -db ../../laevis_genome/XENLA_10.1_genome.fa_blastable -out candidate_sex_locus_slc26a7.L+UTR_exon1.fa
 ```
 
-the code gave me extractions from each chromosome. So I opend the output file in vi using `vi candidate_sex_locus_slc26a7.L+UTR_exon1.fa` and removed all sequences but Chr6L. 
+the code gave me extractions from each chromosome. So I opend the output file in vi using `vi candidate_sex_locus_slc26a7.L+UTR_exon1.fa` and removed all sequences but Chr6L. Sequence can be directly copied from vi to Geneious.
 
+## Xenopus tropicalis
+
+I used the sequence extracted from the laevis genome including nucleotides from both sides to have a sequence of app 1 kb. Then I copied this sequece to the Blast on Xenbase. Click on the best hit ('Overview of Results'). This redirected me to the trop database where I can see the structure of a gene and trop coordinates. Then I used the coordinates for extraction of the sequence using this code:
+
+```
+blastdbcmd -entry all -range 2881130-2881853 -db /home/knedlo/projects/rrg-ben/knedlo/tropicalis_genome/XENTR_10.0_genome.fa_blastable -out candidate_sex_locus_LOC121395205_trop_exon.fa
+```
+
+the code gave me extractions from each chromosome. So I opend the output file in vi using `vi candidate_sex_locus_LOC121395205_trop_exon.fa` and removed all sequences but Chr6.
+
+Sequence can be directly copied to Geneious
+
+Another way is:
 I used the same laevis coordinates for the trop genome but the corresponding region has no gene there. slc26a7 gene is 10 Mbp upstream. Therefore I used `blastn` to search homologous trop sequence:
 
 ```
 blastn -query candidate_sex_locus_slc26a7.L+UTR_exon1.fa -db /home/knedlo/projects/rrg-ben/knedlo/tropicalis_genome/XENTR_10.0_genome.fa_blastable -outfmt 6 -out candidate_sex_locus_slc26a7.L+UTR_exon1.fa_to_XT
 ```
-
-(A faster option is to copy the sequence extracted from the laevis genome to the Blast on Xenbase. If there is no match in trop databese, take a longer sequence for blast)
 
 I opened the output result using `more candidate_sex_locus_slc26a7.L+UTR_exon1.fa_to_XT` and see this: `:136504257-136504516	Chr6	84.277	159	18	4	1	159	126806460	126806611	3.00e-34	148`. trop coordinates are 126806460-126806611.
 
@@ -65,7 +76,7 @@ blastdbcmd -entry all -range 126805460-126807611 -db /home/knedlo/projects/rrg-b
 
 files with extravted sequences converted (remaned) to the '.fa' 
 
-files downloaded to Google disk 
+files downloaded to Google disk (or copied directly to Geneios)
 
 ```
 scp knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/largeni_candidate_sex_loci/slc26a7/ .
