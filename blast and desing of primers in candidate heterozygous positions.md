@@ -43,7 +43,7 @@ one of candidates regions is 136504257-136504516 of slc26a7.L gene located on Ch
 blastdbcmd -entry all -range 136504257-136504516 -db ../../laevis_genome/XENLA_10.1_genome.fa_blastable -out candidate_sex_locus_slc26a7.L+UTR_exon1.fa
 ```
 
-the code gave me extractions from each chromosome. So I opend the output file in vi using `vi candidate_sex_locus_slc26a7.L+UTR_exon1.fa` and removed all sequences but Chr6L. Sequence can be directly copied from vi to Geneious.
+the code gave me extractions from each chromosome. So I opend the output file in vi using `vi candidate_sex_locus_slc26a7.L+UTR_exon1.fa` and removed all sequences but Chr6L. Sequence can be directly copied from vi to Geneious, annotate exons and UTRs, and design primers in the conserved regions for both species.
 
 ## Xenopus tropicalis
 
@@ -55,7 +55,7 @@ blastdbcmd -entry all -range 2881130-2881853 -db /home/knedlo/projects/rrg-ben/k
 
 the code gave me extractions from each chromosome. So I opend the output file in vi using `vi candidate_sex_locus_LOC121395205_trop_exon.fa` and removed all sequences but Chr6.
 
-Sequence can be directly copied to Geneious, annotate exons and design primers in the conserved regions for both species.
+Sequence can be directly copied to Geneious, annotate exons and UTRs, and design primers in the conserved regions for both species.
 
 
 Another way is:
