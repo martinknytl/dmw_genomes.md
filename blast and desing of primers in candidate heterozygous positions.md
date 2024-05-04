@@ -11,11 +11,12 @@ copy gff table (annotation file with exons, modified for synteny mapping) from c
 ```
 cut -f1,2,3,4,5,6,7,8 XENLA_10.1_Xenbase_longest_CDSonly.gff > XENLA_10.1_Xenbase_longest_CDSonly_cut.txt
 ```
+maybe tab was added, but not sure
 
 THIS DOES NOT WORK: from the txt file (all_larg_Sex_specific_heterozygosity_5_5_only.txt) print rows, which has value in the column 2 in between values of columns 4 and 5 in the gff file (XENLA_10.1_Xenbase_longest_CDSonly.gff)
-```
 
 THIS WAS NOT USED:
+```
 awk -F $'\t' ' { if ($4 > $5) {t = $4; $4 = $5; $5 = t; print; } } ' OFS=$'\t' XENLA_10.1_Xenbase_longest_CDSonly.gff  > XENLA_10.1_Xenbase_longest_CDSonly_swap.txt
 awk -F $'\t' ' { if ($4 < $5) {print; } } ' OFS=$'\t' XENLA_10.1_Xenbase_longest_CDSonly.gff  > XENLA_10.1_Xenbase_longest_CDSonly_nonswap.txt
 awk '{print}' XTlongCDS_to_XL_Ssubgenome_nonswap.txt XTlongCDS_to_XL_Ssubgenome_swap.txt > XTlongCDS_to_XL_Ssubgenome_final.txt
