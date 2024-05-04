@@ -1,6 +1,6 @@
-## extraction of coding sequences for variable positions that have the best hit 5/5
+## extraction of coding sequences for variable positions that have the best hit 4/4 and higher
 
-print rows with the best hit (5/5)
+print rows with the hits 4/4, 4/5, and 5/4
 
 ```
 awk '$(NF-1) >= 4 && $NF >= 4 {print}' all_larg_Sex_specific_heterozygosity.txt > all_larg_Sex_specific_heterozygosity_4_4_and_higher.txt
