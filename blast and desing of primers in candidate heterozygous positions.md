@@ -13,7 +13,7 @@ cut -f1,2,3,4,5,6,7,8 XENLA_10.1_Xenbase_longest_CDSonly.gff > XENLA_10.1_Xenbas
 ```
 maybe tab was added, but not sure
 
-then these two tables were transferred to RStudio and using script `sex_linked_largeni.R` I added the column 'exon' in which numbers 0 and 1 occur (0 = SNP is located in intronic locus, 1 = SNP is located in exonic locus) 
+then these two tables were transferred to RStudio and using script `sex_linked_largeni.R` I added the column 'exon' in which numbers 0 and 1 occur (0 = SNP is located in intronic locus, 1 = SNP is located in exonic locus). Table saved as all_larg_Sex_specific_heterozygosity_4_4_and_higher_exons.txt
 
 THIS DOES NOT WORK: from the txt file (all_larg_Sex_specific_heterozygosity_5_5_only.txt) print rows, which has value in the column 2 in between values of columns 4 and 5 in the gff file (XENLA_10.1_Xenbase_longest_CDSonly.gff)
 
