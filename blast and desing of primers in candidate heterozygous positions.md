@@ -1,4 +1,4 @@
-## extraction of coding sequences for variable positions that have the best hit 4/4 and higher
+## identification of coding sequences for variable positions that have the best hit 4/4 and higher
 
 print rows with the hits 4/4, 4/5, and 5/4
 
@@ -12,6 +12,8 @@ copy gff table (annotation file with exons, modified for synteny mapping) from c
 cut -f1,2,3,4,5,6,7,8 XENLA_10.1_Xenbase_longest_CDSonly.gff > XENLA_10.1_Xenbase_longest_CDSonly_cut.txt
 ```
 maybe tab was added, but not sure
+
+then these two tables were transferred to RStudio and using script `sex_linked_largeni.R` I added the column 'exon' in which numbers 0 and 1 occur (0 = SNP is located in intronic locus, 1 = SNP is located in exonic locus) 
 
 THIS DOES NOT WORK: from the txt file (all_larg_Sex_specific_heterozygosity_5_5_only.txt) print rows, which has value in the column 2 in between values of columns 4 and 5 in the gff file (XENLA_10.1_Xenbase_longest_CDSonly.gff)
 
@@ -31,11 +33,11 @@ awk -F $'\t' ' { if ($4 > $5) {t = $4; $4 = $5; $5 = t; print; } } ' OFS=$'\t' X
 
 ## Xenopus laevis
 
-I selected a positions in largeni genome (all_larg_Sex_specific_heterozygosity.txt) that is heterozygous in all females and homozygous in all males in exonic region. If there are at least 5 variable positions within a locus
+I selected a positions in largeni genome (all_larg_Sex_specific_heterozygosity.txt; for exonic regions ans SNPs with hits 4 and higher: all_larg_Sex_specific_heterozygosity_4_4_and_higher_exons.txt) that is heterozygous in all females and homozygous in all males in exonic region. If there are at least 5 variable positions within a locus
 
 I Added candidate coordinates to the laevis genome on the web site https://www.xenbase.org/xenbase/displayJBrowse.do?data=data/xl10_1 and "go"
 
-Now I see the selected region and can to dostinguis if it is exon, intron, UTR. I primarily focused on exons. Then using a "copy" and "paste" fasta sequence of features from Xenbase to Geneious. Put annotations as much as it possible.
+Now I see the selected region and can to distinguish if it is exon, intron, UTR. I primarily focused on exons. Then using a "copy" and "paste" fasta sequence of features from Xenbase to Geneious. Put annotations as much as it possible.
 
 The interesting region using coordinates from table (all_larg_Sex_specific_heterozygosity.txt) was extracted within the Bash interpreter from downloaded genome using the `blastdbcmd` 
 
