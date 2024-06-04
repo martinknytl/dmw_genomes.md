@@ -35,6 +35,35 @@ cp -r ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/ben_scripts/ .
 ```
 ```.``` /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/ben_scripts
 
+or easier to run FasQC using one bash script:
+
+```
+#!/bin/sh
+#SBATCH --job-name=fastQC
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=96:00:00
+#SBATCH --mem=8gb
+#SBATCH --output=fastQC.%J.out
+#SBATCH --error=fastQC.%J.err
+#SBATCH --account=def-ben
+
+# run by passing a directory argument like this
+# sbatch ./2020_trimmomatic.sh ../raw_data/plate1
+
+
+module load fastqc/0.12.1
+module load StdEnv/2023
+
+for i in *fq.gz ; do fastqc $i
+done
+```
+
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/martin_scripts/2024_fastQC.sh
+```
+
+
 **2020_trimmomatic.sh script**
 ```
 #!/bin/sh
@@ -69,6 +98,11 @@ sbatch ../ben_scripts/2020_trimmomatic.sh .
 ```
 cp ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/ben_scripts/TruSeq2_and_3-PE-2.fa .
 ```
+to check jobs:
+```
+squeue -u knedlo
+```
+
 
 ### 4) map trimmed sequences to X. laevis genome
 
