@@ -63,6 +63,10 @@ cp -r ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/ben_scripts/ .
 ```
 ```.``` /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/ben_scripts	
 
+to check a status of jobs:
+```
+squeue -u knedlo
+```
 
 **2020_trimmomatic.sh script**
 ```
@@ -97,10 +101,6 @@ sbatch ../ben_scripts/2020_trimmomatic.sh .
 ```
 ```
 cp ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/ben_scripts/TruSeq2_and_3-PE-2.fa .
-```
-to check jobs:
-```
-squeue -u knedlo
 ```
 
 
