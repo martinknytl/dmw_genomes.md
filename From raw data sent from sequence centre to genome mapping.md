@@ -123,6 +123,8 @@ mv  NS.LH00147_0009.001.IDT_i7_42---IDT_i5_42.Cas262409_male_trim_R*.fq.gz temp1
 mv NS.LH00147_0009.001.IDT_i7_43---IDT_i5_43.Z23350_male_trim_R*.fq.gz temp1/
 ```
 
+or even sequences of one individual can be moved to one folder and thus the script can run for each sequence separately (this was preformed in `2024_larg_pygm` 
+
 **mapping script**
 ```
 #!/bin/sh
