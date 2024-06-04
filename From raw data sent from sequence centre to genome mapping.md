@@ -29,12 +29,6 @@ go to folder where you want to create folder with fastqc.html files, make a dire
 scp knedlo@graham.computecanada.ca:/home/knedlo... .. .. .. /*fastqc.html .
 ```
 
-### 3) Run trimmomatic
-```
-cp -r ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/ben_scripts/ .
-```
-```.``` /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/ben_scripts
-
 or easier to run FasQC using one bash script:
 
 ```
@@ -62,6 +56,12 @@ done
 ```
 sbatch /home/knedlo/projects/rrg-ben/knedlo/martin_scripts/2024_fastQC.sh
 ```
+
+### 3) Run trimmomatic
+```
+cp -r ~/projects/rrg-ben/for_martin/2023_clivii_largeni_pygmaeus/ben_scripts/ .
+```
+```.``` /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/ben_scripts	
 
 
 **2020_trimmomatic.sh script**
