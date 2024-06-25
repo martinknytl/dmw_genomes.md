@@ -132,5 +132,5 @@ samtools index ${1}_rg.bam
 
 script was executed:
 ```
-sbatch ../../ben_scripts/2022_picard_add_read_groups_and_index.sh fem_larg_BJE1581_S8_sorted
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2022_picard_add_read_groups_and_index.sh fem_pygm_ELI2372_S3_sorted
 ```
