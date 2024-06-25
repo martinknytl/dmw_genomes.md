@@ -39,8 +39,7 @@ FasQC script of trimmed sequences:
 #SBATCH --account=def-ben
 
 # run by passing a directory argument like this
-# sbatch ./2020_trimmomatic.sh ../raw_data/plate1
-
+# sbatch sbatch /home/knedlo/projects/rrg-ben/knedlo/martin_scripts/2024_fastQC.sh
 
 module load fastqc/0.12.1
 module load StdEnv/2023
@@ -75,8 +74,8 @@ use the '2024_align_paired_fq_to_ref.sh' script ('martin_csripts' folder because
 #SBATCH --job-name=bwa_align
 #SBATCH --nodes=4
 #SBATCH --ntasks-per-node=4
-#SBATCH --time=10:00:00
-#SBATCH --mem=4gb
+#SBATCH --time=168:00:00
+#SBATCH --mem=32gb
 #SBATCH --output=bwa_align.%J.out
 #SBATCH --error=bwa_align.%J.err
 #SBATCH --account=def-ben
