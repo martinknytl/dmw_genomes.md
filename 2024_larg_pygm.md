@@ -62,23 +62,12 @@ scp knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/2024_lar
 
 ### 4) map trimmed sequences to X. laevis genome
 
-each sample has (in the `raw_data` folder) R1 and R2 raw reads, R1 and R2 trimmed reads, and R1 and R2 single reads
+use R1 and R2 trimmed reads for bwa mapping
 
-first 10 R1 and R2 trimmed reads moved to the temp1 folder: 
-```
-mkdir temp1
-mv NS.LH00147_0009.001.IDT_i7_18---IDT_i5_18.BJE1507-pool_trim_R*.fq.gz temp1
-mv NS.LH00147_0009.001.IDT_i7_19---IDT_i5_19.Cas260421_female_trim_R*.fq.gz temp1/
-mv NS.LH00147_0009.001.IDT_i7_20---IDT_i5_20.AMNH17295_female_trim_R*.fq.gz temp1/
-mv NS.LH00147_0009.001.IDT_i7_21---IDT_i5_21.Z23339_male_trim_R*.fq.gz temp1/
-mv NS.LH00147_0009.001.IDT_i7_30---IDT_i5_30.Z23341_female_trim_R*.fq.gz temp1/
-mv NS.LH00147_0009.001.IDT_i7_31---IDT_i5_31.AMNH17292_female_trim_R*.fq.gz temp1/
-mv NS.LH00147_0009.001.IDT_i7_32---IDT_i5_32.Cas262486_male_trim_R*.fq.gz temp1/
-mv  NS.LH00147_0009.001.IDT_i7_33---IDT_i5_33.BJE1506-pool_trim_R*.fq.gz temp1/
-mv  NS.LH00147_0009.001.IDT_i7_42---IDT_i5_42.Cas262409_male_trim_R*.fq.gz temp1/
-mv NS.LH00147_0009.001.IDT_i7_43---IDT_i5_43.Z23350_male_trim_R*.fq.gz temp1/
-```
+make a folder for each individual sequences: e.g., `mkdir fem_larg_BJE1581/`, move the fem_larg_BJE1581_S8_trim_R1.fq.gz and fem_larg_BJE1581_S8_trim_R2.fq.gz files in the fem_larg_BJE1581 folder using `mv` command
 
-or even sequences of one individual can be moved to one folder and thus the script can run for each sequence separately (this was preformed in `2024_larg_pygm` 
+`mkdir fem_larg_BJE1582/` and move the fem_larg_BJE1582_S9_trim_R1.fq.gz and fem_larg_BJE1582_S9_trim_R2.fq.gz files there etc.
+
+use the '2024_align_paired_fq_to_ref.sh' script ('martin_csripts' folder because modules in the script were updated) for each individual separately 
 
 **mapping script**
