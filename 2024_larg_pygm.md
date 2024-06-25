@@ -70,4 +70,68 @@ make a folder for each individual sequences: e.g., `mkdir fem_larg_BJE1581/`, mo
 
 use the '2024_align_paired_fq_to_ref.sh' script ('martin_csripts' folder because modules in the script were updated) for each individual separately 
 
-**mapping script**
+```
+#!/bin/sh
+#SBATCH --job-name=bwa_align
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=4
+#SBATCH --time=10:00:00
+#SBATCH --mem=4gb
+#SBATCH --output=bwa_align.%J.out
+#SBATCH --error=bwa_align.%J.err
+#SBATCH --account=def-ben
+
+# run by passing an argument like this (in the directory with the files)
+# sbatch 2020_align_paired_fq_to_ref.sh pathandname_of_ref path_to_paired_fq_filez
+# sbatch 2020_align_paired_fq_to_ref.sh /home/ben/projects/rrg-ben/ben/2018_Austin_XB_genome/Austin_genome/Xbo.v1.fa.gz pathtofqfilez
+
+module load bwa/0.7.17
+# module load samtools/1.10
+module load StdEnv/2023  gcc/12.3 samtools/1.20
+
+for file in ${2}/*_trim_R2.fq.gz ; do         # Use ./* ... NEVER bare *    
+    if [ -e "$file" ] ; then   # Check whether file exists.
+	bwa mem ${1} ${file::-14}_trim_R1.fq.gz ${file::-14}_trim_R2.fq.gz -t 16 | samtools view -Shu - | samtools sort - -o ${file::-14}_sorted.bam
+	samtools index ${file::-14}_sorted.bam
+  fi
+done
+```
+
+script was executed:
+
+```
+sbatch ../../ben_scripts/2020_align_paired_fq_to_ref.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa .
+```
+
+### 5) read groups using picard
+
+a script for read groups was modified with modules. It is not possible to change only one module because they require certain modules which can be found using 'spider' as it is recommended in the error file
+
+```
+#!/bin/sh
+#SBATCH --job-name=readgroups
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=24:00:00
+#SBATCH --mem=8gb
+#SBATCH --output=readgroups.%J.out
+#SBATCH --error=readgroups.%J.err
+#SBATCH --account=def-ben
+
+# run by passing an argument like this
+# sbatch 2022_picard_add_read_groups_and_index.sh bamfile_prefix
+
+# module load picard/2.23.3
+module load picard/3.1.0
+
+    java -jar $EBROOTPICARD/picard.jar AddOrReplaceReadGroups I=${1}.bam O=${1}_rg.bam RGID=4 RGLB=${1} RGPL=ILLUMINA RGPU=${1} RGSM=${1}
+
+# module load StdEnv/2020 samtools/1.12
+module load StdEnv/2023 samtools/1.20
+samtools index ${1}_rg.bam
+```
+
+script was executed:
+```
+sbatch ../../ben_scripts/2022_picard_add_read_groups_and_index.sh fem_larg_BJE1581_S8_sorted
+```
