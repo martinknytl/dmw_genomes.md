@@ -102,6 +102,8 @@ script was executed:
 sbatch ../../ben_scripts/2020_align_paired_fq_to_ref.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa .
 ```
 
+after bwa mapping is done, trimed files moved to the "trimmed_trimmomatic" folder
+
 ### 5) read groups using picard
 
 a script for read groups was modified with modules. It is not possible to change only one module because they require certain modules which can be found using 'spider' as it is recommended in the error file
@@ -133,4 +135,10 @@ samtools index ${1}_rg.bam
 script was executed:
 ```
 sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2022_picard_add_read_groups_and_index.sh fem_pygm_ELI2372_S3_sorted
+```
+
+after picard script is done, all files moved to the 'bwa_alignment' file. For example:
+
+```
+mv fem_larg_BJE1581/*sorted.bam fem_larg_BJE1581/*sorted.bam.bai bwa_alignment/
 ```
