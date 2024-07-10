@@ -142,3 +142,52 @@ after picard script is done, all files moved to the 'bwa_alignment' file. For ex
 ```
 mv fem_larg_BJE1581/*sorted.bam fem_larg_BJE1581/*sorted.bam.bai bwa_alignment/
 ```
+The 'sorted_rg.bam' and 'sorted_rg.bam.bai' files will be used for haplotype caller in next step.
+
+### 5) call haplotype aka haplotype caller
+
+```
+#!/bin/sh
+#SBATCH --job-name=HaplotypeCaller
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=96:00:00
+#SBATCH --mem=30gb
+#SBATCH --output=HaplotypeCaller.%J.out
+#SBATCH --error=HaplotypeCaller.%J.err
+#SBATCH --account=def-ben
+
+
+# This script will read in the *_sorted.bam file names in a directory, and 
+# make and execute the GATK command "RealignerTargetCreator" on these files. 
+
+# execute like this:
+# sbatch 2021_HaplotypeCaller.sh ref dir_of_bam chr
+# sbatch 2021_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa bamfiledirectory chr
+
+# module load nixpkgs/16.09 gatk/4.1.0.0
+module load gatk/4.4.0.0 StdEnv/2023
+
+for file in ${2}*_rg.bam
+do
+    gatk --java-options -Xmx24G HaplotypeCaller  -I ${file} -R ${1} -L ${3} -O ${file}_${3}.g.vcf -ERC GVCF
+done
+```
+
+commands for the execution of scripts for all chromosomes in sample 'fem_pygm_ELI2081':
+
+```
+for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2024_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa /home/knedlo/projects/rrg-ben/knedlo/2024_larg_pygm/fem_pygm_ELI2081/ Chr$x\L; done
+```
+```
+for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2024_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa /home/knedlo/projects/rrg-ben/knedlo/2024_larg_pygm/fem_pygm_ELI2081/ Chr$x\S; done
+```
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2024_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa /home/knedlo/projects/rrg-ben/knedlo/2024_larg_pygm/fem_pygm_ELI2081/ Chr9_10L
+```
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2024_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa /home/knedlo/projects/rrg-ben/knedlo/2024_larg_pygm/fem_pygm_ELI2081/ Chr9_10S
+```
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2024_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa /home/knedlo/projects/rrg-ben/knedlo/2024_larg_pygm/fem_pygm_ELI2081/ Scaffolds
+```
