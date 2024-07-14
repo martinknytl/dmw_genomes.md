@@ -59,7 +59,7 @@ scp knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/2024_lar
 ```
 
 
-### 4) map trimmed sequences to X. laevis genome
+### 4) map trimmed sequences to X. laevis genome (bwa alignment)
 
 use R1 and R2 trimmed reads for bwa mapping
 
