@@ -144,7 +144,7 @@ mv fem_larg_BJE1581/*sorted.bam fem_larg_BJE1581/*sorted.bam.bai bwa_alignment/
 ```
 The 'sorted_rg.bam' and 'sorted_rg.bam.bai' files will be used for haplotype caller in next step.
 
-### 5) call haplotype aka haplotype caller
+### 6) call haplotype aka haplotype caller
 
 ```
 #!/bin/sh
@@ -190,4 +190,102 @@ sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2024_HaplotypeCaller.sh 
 ```
 ```
 sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2024_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa /home/knedlo/projects/rrg-ben/knedlo/2024_larg_pygm/fem_pygm_ELI2081/ Scaffolds
+```
+
+### 7) CombineGVCFs
+
+```
+#!/bin/sh
+#SBATCH --job-name=CombineGVCFs
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=48:00:00
+#SBATCH --mem=12gb
+#SBATCH --output=CombineGVCFs.%J.out
+#SBATCH --error=CombineGVCFs.%J.err
+#SBATCH --account=rrg-ben
+
+# for graham.computecanada change account def-ben to rrg-ben 
+# This script will read in the *.g.vcf file names in a directory, and 
+# make and execute the GATK command "GenotypeGVCFs" on these files. 
+
+# execute job for Chr9_10L:
+# sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_CombineGVCFs.sh /home/knedlo/projects/def-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ Chr9_10L 
+
+module load nixpkgs/16.09 gatk/4.1.0.0
+
+commandline="gatk --java-options -Xmx10G CombineGVCFs -R ${1}"
+for file in ${2}*${3}*g.vcf
+do
+    commandline+=" -V ${file}"
+done
+
+commandline+=" -L ${3} -O ${2}allsites_${3}.g.vcf.gz"
+
+${commandline}
+```
+
+using commands:
+
+```
+for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_CombineGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ Chr$x\L; done
+```
+```
+for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_CombineGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ Chr$x\S; done
+```
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_CombineGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ Chr9_10L
+```
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_CombineGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ Chr9_10S
+```
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_CombineGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ Scaffolds
+```
+
+### 8) GenotypeGVCFs
+
+```
+#!/bin/sh
+#SBATCH --job-name=GenotypeGVCFs
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=12:00:00
+#SBATCH --mem=12gb
+#SBATCH --output=GenotypeGVCFs.%J.out
+#SBATCH --error=GenotypeGVCFs.%J.err
+#SBATCH --account=rrg-ben
+
+
+# This script will read in the *.g.vcf file names in a directory, and 
+# make and execute the GATK command "GenotypeGVCFs" on these files. 
+
+# execute like this:
+
+# sbatch ../../ben_scripts/2021_GenotypeGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ allsites_Chr1L.g.vcf.gz Chr1L
+# or loop for chromosomes 1-8L: for x in {1..8}; do sbatch ../../ben_scripts/2021_GenotypeGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ allsites_Chr$x\L.gvcf.gz Chr$x\L; done
+
+# ./ = /home/knedlo/projects/rrg-ben/knedlo/2023_clivii_largeni_pygmaeus/bams_combined/combined_GVCFs
+
+module load StdEnv/2023 gatk/4.4.0.0
+
+commandline="gatk --java-options -Xmx10G GenotypeGVCFs -R ${1} -V ${2}${3} -L ${4} -O ${2}${3}_${4}.vcf.gz"
+
+${commandline}
+```
+
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_GenotypeGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ allsites_Chr9_10L.g.vcf.gz Chr9_10L
+```
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_GenotypeGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ allsites_Chr9_10S.g.vcf.gz Chr9_10S
+```
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_GenotypeGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ allsites_Scaffolds.g.vcf.gz Scaffolds
+```
+```
+for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_GenotypeGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ allsites_Chr$x\L.g.vcf.gz Chr$x\L; done
+```
+```
+for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_GenotypeGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ allsites_Chr$x\S.g.vcf.gz Chr$x\S; done
 ```
