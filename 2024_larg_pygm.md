@@ -289,3 +289,48 @@ for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021
 ```
 for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_GenotypeGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ allsites_Chr$x\S.g.vcf.gz Chr$x\S; done
 ```
+
+### 9) VariantFiltration
+
+```
+#!/bin/sh
+#SBATCH --job-name=VariantFiltration
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=36:00:00
+#SBATCH --mem=10gb
+#SBATCH --output=VariantFiltration.%J.out
+#SBATCH --error=VariantFiltration.%J.err
+#SBATCH --account=def-ben
+
+
+# This script will execute the GATK command "VariantFiltration" on a gvcf file
+
+# execute like this:
+# sbatch 2021_VariantFiltration.sh path_and_file
+
+module load nixpkgs/16.09 gatk/4.1.0.0
+
+gatk --java-options -Xmx8G VariantFiltration -V ${1}\
+    -filter "QD < 2.0" --filter-name "QD2" \
+    -filter "QUAL < 20.0" --filter-name "QUAL20" \
+    -filter "SOR > 3.0" --filter-name "SOR3" \
+    -filter "FS > 60.0" --filter-name "FS60" \
+    -filter "MQ < 40.0" --filter-name "MQ40" \
+    -O ${1}_filtered.vcf.gz
+```
+
+```
+for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_VariantFiltration.sh ./allsites_Chr$x\L.g.vcf.gz_Chr$x\L.vcf.gz; done
+```
+```
+for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_VariantFiltration.sh ./allsites_Chr$x\S.g.vcf.gz_Chr$x\S.vcf.gz; done
+```
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_VariantFiltration.sh ./allsites_Chr9_10L.g.vcf.gz_Chr9_10L.vcf.gz
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_VariantFiltration.sh ./allsites_Chr9_10S.g.vcf.gz_Chr9_10S.vcf.gz
+```
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_VariantFiltration.sh ./allsites_Scaffolds.g.vcf.gz_Scaffolds.vcf.gz
+```
