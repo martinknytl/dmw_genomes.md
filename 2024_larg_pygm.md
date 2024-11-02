@@ -329,8 +329,57 @@ for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021
 ```
 sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_VariantFiltration.sh ./allsites_Chr9_10L.g.vcf.gz_Chr9_10L.vcf.gz
 ```
+```
 sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_VariantFiltration.sh ./allsites_Chr9_10S.g.vcf.gz_Chr9_10S.vcf.gz
 ```
 ```
 sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_VariantFiltration.sh ./allsites_Scaffolds.g.vcf.gz_Scaffolds.vcf.gz
+```
+
+### 10) SelectVariants
+
+```
+#!/bin/sh
+#SBATCH --job-name=SelectVariants
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=36:00:00
+#SBATCH --mem=10gb
+#SBATCH --output=SelectVariants.%J.out
+#SBATCH --error=SelectVariants.%J.err
+#SBATCH --account=rrg-ben
+
+
+# This script will execute the GATK command "SelectVariants" on a file
+
+# execute like this:
+# sbatch 2021_SelectVariants.sh pathandfile
+
+# example of loop: for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_SelectVariants.sh/2021_SelectVariants.sh ./allsites_Chr$x\L.g.vcf.gz_Chr$x\L.vcf.gz_filtered.vcf.gz; done
+# no loop: sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_SelectVariants.sh ./allsites_Chr9_10L.g.vcf.gz_Chr9_10L.vcf.gz_filtered.vcf.gz
+
+
+module load nixpkgs/16.09 gatk/4.1.0.0
+
+gatk --java-options -Xmx8G SelectVariants \
+        --exclude-filtered \
+        -V ${1} \
+        -O ${1}_filtered_removed.vcf
+```
+
+from the directory "variantFiltration"
+```
+for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_SelectVariants.sh ./allsites_Chr$x\L.g.vcf.gz_Chr$x\L.vcf.gz_filtered.vcf.gz; done
+```
+```
+for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_SelectVariants.sh ./allsites_Chr$x\S.g.vcf.gz_Chr$x\S.vcf.gz_filtered.vcf.gz; done
+```
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_SelectVariants.sh ./allsites_Chr9_10L.g.vcf.gz_Chr9_10L.vcf.gz_filtered.vcf.gz
+```
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_SelectVariants.sh ./allsites_Chr9_10L.g.vcf.gz_Chr9_10S.vcf.gz_filtered.vcf.gz
+```
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_SelectVariants.sh ./allsites_Scaffolds.g.vcf.gz_Scaffolds.vcf.gz_filtered.vcf.gz
 ```
