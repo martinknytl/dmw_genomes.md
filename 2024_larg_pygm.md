@@ -383,3 +383,64 @@ sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_SelectVariants.sh .
 ```
 sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_SelectVariants.sh ./allsites_Scaffolds.g.vcf.gz_Scaffolds.vcf.gz_filtered.vcf.gz
 ```
+
+### 11) convert vcf to tab
+
+all `*filtered_removed.vcf` and *filtered_removed.vcf.idx` were moved to the `selectVariants` directory
+
+Script for the L chromosomes:
+
+```
+#!/bin/sh
+#SBATCH --job-name=vcf-to-tab
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=12:00:00
+#SBATCH --mem=10gb
+#SBATCH --output=vcf-to-tab.%J.out
+#SBATCH --error=vcf-to-tab.%J.err
+#SBATCH --account=rrg-ben
+
+
+# This script will execute zcat file.vcf.gz | vcf-to-tab > out.tab
+# sbatch /home/knedlo/projects/rrg-ben/knedlo/martin_scripts/2024_vcf-to-tab_for_chrL.sh
+
+module load StdEnv/2020 vcftools/0.1.16
+
+# loop:
+
+for x in {1..8}; do zcat allsites_Chr$x\L.g.vcf.gz_Chr$x\L.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chr$x\L.tab; done
+allsites_Chr1L.g.vcf.gz_Chr1L.vcf.gz_filtered.vcf.gz_filtered_removed.vcf
+# no loop: 
+
+zcat allsites_Chr9_10L.g.vcf.gz_Chr9_10L.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chr9_10L.tab
+```
+
+Script for the S chromosomes:
+
+```
+#!/bin/sh
+#SBATCH --job-name=vcf-to-tab
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=12:00:00
+#SBATCH --mem=10gb
+#SBATCH --output=vcf-to-tab.%J.out
+#SBATCH --error=vcf-to-tab.%J.err
+#SBATCH --account=def-ben
+
+
+# This script will execute zcat file.vcf.gz | vcf-to-tab > out.tab
+# sbatch 2024_vcf-to-tab_for_chrS.sh 
+
+module load StdEnv/2020 vcftools/0.1.16
+
+# loop:
+
+for x in {1..8}; do zcat allsites_Chr$x\S.g.vcf.gz_Chr$x\S.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chr$x\S.tab; done
+
+# no loop: 
+
+zcat allsites_Chr9_10S.g.vcf.gz_Chr9_10S.vcf.gz_filtered.vcf.gz_filtered_removed.vcf.gz | vcf-to-tab > Chr9_10S.tab
+```
+
