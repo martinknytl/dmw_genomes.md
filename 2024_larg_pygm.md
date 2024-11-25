@@ -378,7 +378,7 @@ for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021
 sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_SelectVariants.sh ./allsites_Chr9_10L.g.vcf.gz_Chr9_10L.vcf.gz_filtered.vcf.gz
 ```
 ```
-sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_SelectVariants.sh ./allsites_Chr9_10L.g.vcf.gz_Chr9_10S.vcf.gz_filtered.vcf.gz
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_SelectVariants.sh ./allsites_Chr9_10S.g.vcf.gz_Chr9_10S.vcf.gz_filtered.vcf.gz
 ```
 ```
 sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2021_SelectVariants.sh ./allsites_Scaffolds.g.vcf.gz_Scaffolds.vcf.gz_filtered.vcf.gz
