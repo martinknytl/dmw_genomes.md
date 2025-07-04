@@ -1,0 +1,135 @@
+### 1) clivii genome downloaded
+
+### 2) trimmomatic
+
+go to raw_data directory and check if there is `TruSeq2_and_3-PE-2.fa`. This file includes adaptor sequences. Then script is executed frem the same directory.
+
+trimmomatic script:
+
+```
+#!/bin/sh
+#SBATCH --job-name=trimmomatic
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=96:00:00
+#SBATCH --mem=8gb
+#SBATCH --output=trimmomatic.%J.out
+#SBATCH --error=trimmomatic.%J.err
+#SBATCH --account=rrg-ben
+
+# run by passing a directory argument like this
+# sbatch ./2020_trimmomatic.sh path_to_raw_data
+# TruSeq2_and_3-PE-2.fa must be present in the directory, from which the trimmomatic script is executed
+
+module load StdEnv/2023
+module load trimmomatic/0.39
+# R1_001.fastq.gz
+#v=1
+#  Always use for-loop, prefix glob, check if exists file.
+for file in $1/*R1_001.fastq.gz; do         # Use ./* ... NEVER bare *
+  if [ -e "$file" ] ; then   # Check whether file exists.
+      java -jar $EBROOTTRIMMOMATIC/trimmomatic-0.39.jar PE ${file::-15}R1_001.fastq.gz ${file::-15}R2_001.fastq.gz ${file::-15}_trim_R1.fq.gz ${file::-15}_trim_single_R1.fq.gz ${file::-15}_trim_R2.fq.gz ${file::-15}_trim_single_R2.fq.gz ILLUMINACLIP:TruSeq2_and_3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+  fi
+done
+```
+
+```
+../trimmomatic/2024_trimmomatic.sh ./
+```
+
+`./` = path `/home/knedlo/projects/rrg-ben/knedlo/2024_cliv/raw_data`
+
+### 4) map trimmed sequences to X. clivii genome (bwa alignment)
+
+Trimmed data were generated in the `raw_data` directory. Each trimmed read had two R1 and two R2 files (four primers were used for sequencing?)
+
+folder made for each R1 and R2 trimmed reads (two directories for each individual) in the `trimmomatic` directory: e.g., `mkdir fem_cliv_CAS260427_S3_L001/`, move the CAS260427_S3_L001__trim_R1.fq.gz and CAS260427_S3_L001__trim_R2.fq.gz files in the fem_cliv_CAS260427_S3_L001/ folder using the `mv` command. `mkdir fem_cliv_CAS260427_S3_L002` and move the CAS260427_S3_L002__trim_R1.fq.gz and CAS260427_S3_L002__trim_R2.fq.gz files to the directory etc. Then move all single reads to the `trimmomatic` directory.
+
+go to the first directory `/home/knedlo/projects/rrg-ben/knedlo/2024_cliv/trimmomatic/fem_cliv_CAS260392_S4_L001` use the '2020_align_paired_fq_to_ref.sh' script for each individual separately
+
+```
+#!/bin/sh
+#SBATCH --job-name=bwa_align
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=4
+#SBATCH --time=168:00:00
+#SBATCH --mem=32gb
+#SBATCH --output=bwa_align.%J.out
+#SBATCH --error=bwa_align.%J.err
+#SBATCH --account=rrg-ben
+
+# run by passing an argument like this (in the directory with the files)
+# sbatch 2020_align_paired_fq_to_ref.sh pathandname_of_ref path_to_paired_fq_filez
+# sbatch 2020_align_paired_fq_to_ref.sh /home/ben/projects/rrg-ben/ben/2018_Austin_XB_genome/Austin_genome/Xbo.v1.fa.gz pathtofqfilez
+
+module load bwa/0.7.17
+# module load samtools/1.10
+module load StdEnv/2023  gcc/12.3 samtools/1.20
+
+for file in ${2}/*_trim_R2.fq.gz ; do         # Use ./* ... NEVER bare *    
+    if [ -e "$file" ] ; then   # Check whether file exists.
+        bwa mem ${1} ${file::-14}_trim_R1.fq.gz ${file::-14}_trim_R2.fq.gz -t 16 | samtools view -Shu - | samtools sort - -o ${file::-14}_sorted.bam
+        samtools index ${file::-14}_sorted.bam
+  fi
+done
+```
+
+the script were executed by: 
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2020_align_paired_fq_to_ref.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa .
+```
+
+### 5) merge 2 bam files in 1
+
+date are combined from two different WGS. Some reads have 3 files and some have 2 files
+
+merging 2 bwa alignments into one:
+
+```
+#!/bin/sh
+#SBATCH --job-name=merge2
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=4
+#SBATCH --time=32:00:00
+#SBATCH --mem=16gb
+#SBATCH --output=merge2.%J.out
+#SBATCH --error=merge2.%J.err
+#SBATCH --account=rrg-ben
+
+# run by passing an argument like this (in the directory with the files)
+# sbatch 2024_samtools_merge2.sh merged_path_and_file in1_path_and_file in2_path_and_file 
+
+module load StdEnv/2023  gcc/12.3 samtools/1.20
+
+samtools merge ${1} ${2} ${3}
+
+samtools index ${1}
+```
+
+```
+sbatch 2024_samtools_merge2.sh fem_cliv_CAS262485.merged.bam fem_cliv_CAS262485_S2_L001/CAS262485_S2_L001__sorted.bam fem_cliv_CAS262485_S2_L002/CAS262485_S2_L002__sorted.bam
+```
+
+merging 3 bwa alignments into one:
+
+#!/bin/sh
+#SBATCH --job-name=merge
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=4
+#SBATCH --time=32:00:00
+#SBATCH --mem=16gb
+#SBATCH --output=merge.%J.out
+#SBATCH --error=merge.%J.err
+#SBATCH --account=rrg-ben
+
+# run by passing an argument like this (in the directory with the files)
+# sbatch 2021_samtools_merge3.sh merged_path_and_outfile in1_path_and_file in2_path_and_file in3_path_and_file
+module load samtools/1.10
+
+samtools merge ${1} ${2} ${3} ${4}
+samtools index ${1)
+```
+
+```
+sbatch ../../../../ben_scripts/2021_samtools_merge3.sh fem_cliv_Cas260390.merged.bam NS.LH00147_0009.001.IDT_i7_6---IDT_i5_6.Cas260390_female_sorted.bam NS.LH00147_0009.002.IDT_i7_6---IDT_i5_6.Cas260390_female_sorted.bam NS.LH00147_0009.003.IDT_i7_6---IDT_i5_6.Cas260390_female_sorted.bam .
+```
