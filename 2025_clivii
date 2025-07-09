@@ -1,5 +1,7 @@
 ### 1) clivii genome downloaded
 
+find the code to do indexing!!!
+
 ### 2) trimmomatic
 
 go to raw_data directory and check if there is `TruSeq2_and_3-PE-2.fa`. This file includes adaptor sequences. Then script is executed frem the same directory.
@@ -76,7 +78,7 @@ done
 
 the script were executed by: 
 ```
-sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2020_align_paired_fq_to_ref.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa .
+sbatch /home/knedlo/scratch/knedlo/ben_scripts/2020_align_paired_fq_to_ref.sh /home/knedlo/scratch/knedlo/clivii_male_genome/GCA_046118455.1_ASM4611845v1_genomic.fna .
 ```
 
 ### 5) merge 2 bam files in 1
