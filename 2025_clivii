@@ -114,6 +114,7 @@ sbatch 2024_samtools_merge2.sh fem_cliv_CAS262485.merged.bam fem_cliv_CAS262485_
 
 merging 3 bwa alignments into one:
 
+```
 #!/bin/sh
 #SBATCH --job-name=merge
 #SBATCH --nodes=4
@@ -122,16 +123,17 @@ merging 3 bwa alignments into one:
 #SBATCH --mem=16gb
 #SBATCH --output=merge.%J.out
 #SBATCH --error=merge.%J.err
-#SBATCH --account=rrg-ben
+#SBATCH --account=def-ben
 
 # run by passing an argument like this (in the directory with the files)
-# sbatch 2021_samtools_merge3.sh merged_path_and_outfile in1_path_and_file in2_path_and_file in3_path_and_file
-module load samtools/1.10
+# sbatch 2021_samtools_merge3.sh merged_path_and_outfile in1_path_and_file in2_path_and_file in3_path_and_file in4_path_and_file
+
+module load StdEnv/2023  gcc/12.3 samtools/1.20
 
 samtools merge ${1} ${2} ${3} ${4}
 samtools index ${1)
 ```
 
 ```
-sbatch ../../../../ben_scripts/2021_samtools_merge3.sh fem_cliv_Cas260390.merged.bam NS.LH00147_0009.001.IDT_i7_6---IDT_i5_6.Cas260390_female_sorted.bam NS.LH00147_0009.002.IDT_i7_6---IDT_i5_6.Cas260390_female_sorted.bam NS.LH00147_0009.003.IDT_i7_6---IDT_i5_6.Cas260390_female_sorted.bam .
+sbatch /home/knedlo/scratch/knedlo/ben_scripts/2025_samtools_merge3.sh fem_cliv_CAS260423.merged.bam NS.LH00147_0009.001.IDT_i7_55---IDT_i5_55.CAS260423-pool_sorted.bam NS.LH00147_0009.002.IDT_i7_55---IDT_i5_55.CAS260423-pool_sorted.bam NS.LH00147_0009.003.IDT_i7_55---IDT_i5_55.CAS260423-pool_sorted.bam
 ```
