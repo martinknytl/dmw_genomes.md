@@ -131,7 +131,7 @@ merging 3 bwa alignments into one:
 module load StdEnv/2023  gcc/12.3 samtools/1.20
 
 samtools merge ${1} ${2} ${3} ${4}
-samtools index ${1)
+samtools index ${1}
 ```
 
 ```
