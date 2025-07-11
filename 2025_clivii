@@ -4,7 +4,7 @@ find the code to do indexing!!!
 
 ### 2) trimmomatic
 
-go to raw_data directory and check if there is `TruSeq2_and_3-PE-2.fa`. This file includes adaptor sequences. Then script is executed frem the same directory.
+go to raw_data directory and check if there is `TruSeq2_and_3-PE-2.fa`. This file includes adaptor sequences. Then script is executed from the same directory.
 
 trimmomatic script:
 
@@ -42,12 +42,6 @@ done
 `./` = path `/home/knedlo/projects/rrg-ben/knedlo/2024_cliv/raw_data`
 
 ### 4) map trimmed sequences to X. clivii genome (bwa alignment)
-
-Trimmed data were generated in the `raw_data` directory. Each trimmed read had two R1 and two R2 files (four primers were used for sequencing?)
-
-folder made for each R1 and R2 trimmed reads (two directories for each individual) in the `trimmomatic` directory: e.g., `mkdir fem_cliv_CAS260427_S3_L001/`, move the CAS260427_S3_L001__trim_R1.fq.gz and CAS260427_S3_L001__trim_R2.fq.gz files in the fem_cliv_CAS260427_S3_L001/ folder using the `mv` command. `mkdir fem_cliv_CAS260427_S3_L002` and move the CAS260427_S3_L002__trim_R1.fq.gz and CAS260427_S3_L002__trim_R2.fq.gz files to the directory etc. Then move all single reads to the `trimmomatic` directory.
-
-go to the first directory `/home/knedlo/projects/rrg-ben/knedlo/2024_cliv/trimmomatic/fem_cliv_CAS260392_S4_L001` use the '2020_align_paired_fq_to_ref.sh' script for each individual separately
 
 ```
 #!/bin/sh
