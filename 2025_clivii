@@ -148,3 +148,36 @@ samtools index ${1}
 ```
 sbatch /home/knedlo/scratch/knedlo/ben_scripts/2025_samtools_merge3.sh fem_cliv_CAS260423.merged.bam NS.LH00147_0009.001.IDT_i7_55---IDT_i5_55.CAS260423-pool_sorted.bam NS.LH00147_0009.002.IDT_i7_55---IDT_i5_55.CAS260423-pool_sorted.bam NS.LH00147_0009.003.IDT_i7_55---IDT_i5_55.CAS260423-pool_sorted.bam
 ```
+
+### 6) read groups using picard
+
+read group script:
+
+```
+#!/bin/sh
+#SBATCH --job-name=readgroups
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=24:00:00
+#SBATCH --mem=8gb
+#SBATCH --output=readgroups.%J.out
+#SBATCH --error=readgroups.%J.err
+#SBATCH --account=def-ben
+
+# run by passing an argument like this
+# sbatch 2022_picard_add_read_groups_and_index.sh bamfile_prefix
+
+# module load picard/2.23.3
+module load picard/3.1.0
+
+    java -jar $EBROOTPICARD/picard.jar AddOrReplaceReadGroups I=${1}.bam O=${1}_rg.bam RGID=4 RGLB=${1} RGPL=ILLUMINA RGPU=${1} RGSM=${1}
+
+# module load StdEnv/2020 samtools/1.12
+module load StdEnv/2023 samtools/1.20
+samtools index ${1}_rg.bam
+```
+
+execute read-group script for each individual separately:
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2022_picard_add_read_groups_and_index.sh fem_cliv_Cas260421_merged
+```
