@@ -179,5 +179,5 @@ samtools index ${1}_rg.bam
 
 execute read-group script for each individual separately:
 ```
-sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2022_picard_add_read_groups_and_index.sh fem_cliv_Cas260421_merged
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2022_picard_add_read_groups_and_index.sh fem_cliv_Cas260421.merged
 ```
