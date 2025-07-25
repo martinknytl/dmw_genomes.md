@@ -17,7 +17,6 @@ make the index (I am not sure with this command). I used it a while ago and I se
 bwa index GCA_046118455.1_ASM4611845v1_genomic.fna
 ```
 
-find the code to do indexing!!!
 
 ### 2) trimmomatic
 
@@ -176,6 +175,68 @@ module load picard/3.1.0
 module load StdEnv/2023 samtools/1.20
 samtools index ${1}_rg.bam
 ```
+
+### 7) making index, dictionary file, and bwa index
+
+
+```
+#!/bin/bash
+
+# A script to prepare a reference genome for GATK workflows.
+# This script assumes GATK, Samtools, and BWA are in your PATH.
+
+# Stop the script if any command fails
+set -e
+set -o pipefail
+
+# --- Configuration ---
+# The path to your input FASTA file.
+# IMPORTANT: It's best practice to copy the file into your working directory.
+# This script assumes the FASTA file is in the current directory.
+REF_GENOME="/GCA_046118455.1_ASM4611845v1_genomic.fna" 
+
+# A prefix for derived files (like the dictionary)
+PREFIX=$(GCA_046118455.1_ASM4611845v1_genomic ${REF_GENOME} .fna) 
+
+echo "--- Starting GATK Reference Genome Preparation ---"
+echo "Input FASTA: ${REF_GENOME}"
+echo "Output Prefix: ${PREFIX}"
+echo "------------------------------------------------"
+
+# --- Step 1: Create FASTA index (.fai) using Samtools ---
+if [ ! -f "${REF_GENOME}.fai" ]; then
+    echo "STEP 1: Creating FASTA index with Samtools..."
+    samtools faidx ${REF_GENOME}
+    echo "Done."
+else
+    echo "STEP 1: FASTA index already exists. Skipping."
+fi
+
+# --- Step 2: Create Sequence Dictionary (.dict) using GATK ---
+if [ ! -f "${PREFIX}.dict" ]; then
+    echo "STEP 2: Creating sequence dictionary with GATK..."
+    gatk CreateSequenceDictionary \
+        -R ${REF_GENOME} \
+        -O ${PREFIX}.dict
+    echo "Done."
+else
+    echo "STEP 2: Sequence dictionary already exists. Skipping."
+fi
+
+# --- Step 3: Create BWA index for alignment ---
+if [ ! -f "${REF_GENOME}.bwt" ]; then
+    echo "STEP 3: Creating BWA index..."
+    bwa index ${REF_GENOME}
+    echo "Done."
+else
+    echo "STEP 3: BWA index already exists. Skipping."
+fi
+
+echo "------------------------------------------------"
+echo "--- Preparation Complete! ---"
+echo "Your reference genome is now ready for mapping and variant calling."
+```
+
 
 ### 7) call haplotype aka haplotype caller
 
