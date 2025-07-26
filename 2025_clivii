@@ -180,25 +180,46 @@ samtools index ${1}_rg.bam
 
 
 ```
-#!/bin/bash
+#!/bin/sh
 
-# A script to prepare a reference genome for GATK workflows.
-# This script assumes GATK, Samtools, and BWA are in your PATH.
+#======================================================================================
+#                           INSTRUCTIONS FOR THE SCHEDULER
+#======================================================================================
+# You should have your own #SBATCH directives here. For example:
+#SBATCH --job-name=indexing
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=12:00:00
+#SBATCH --mem=8gb
+#SBATCH --output=indexing.%J.out
+#SBATCH --error=indexing.%J.err
+#SBATCH --account=your_account_name # e.g., rrg-ben
+
+#======================================================================================
+#                                 COMMANDS TO EXECUTE
+#======================================================================================
 
 # Stop the script if any command fails
 set -e
 set -o pipefail
 
-# --- Configuration ---
-# The path to your input FASTA file.
-# IMPORTANT: It's best practice to copy the file into your working directory.
-# This script assumes the FASTA file is in the current directory.
-REF_GENOME="/GCA_046118455.1_ASM4611845v1_genomic.fna" 
+# --- !! IMPORTANT: SETUP THE SOFTWARE ENVIRONMENT !! ---
+echo "Loading Conda..."
+# This next line makes the 'conda' command available to the script.
+# NOTE: The path might be ~/anaconda3/ if you installed the full Anaconda.
+source ~/miniconda3/etc/profile.d/conda.sh
 
-# A prefix for derived files (like the dictionary)
-PREFIX=$(GCA_046118455.1_ASM4611845v1_genomic ${REF_GENOME} .fna) 
+echo "Activating bioinformatics environment..."
+# This next line adds samtools, gatk, and bwa to the PATH.
+conda activate gatk_env #<-- IMPORTANT: Make sure 'gatk_env' is the correct name!
+
 
 echo "--- Starting GATK Reference Genome Preparation ---"
+
+# --- Configuration ---
+REF_GENOME="GCA_046118455.1_ASM4611845v1_genomic.fna" 
+PREFIX=$(basename "${REF_GENOME}" .fna) 
+
 echo "Input FASTA: ${REF_GENOME}"
 echo "Output Prefix: ${PREFIX}"
 echo "------------------------------------------------"
@@ -206,7 +227,7 @@ echo "------------------------------------------------"
 # --- Step 1: Create FASTA index (.fai) using Samtools ---
 if [ ! -f "${REF_GENOME}.fai" ]; then
     echo "STEP 1: Creating FASTA index with Samtools..."
-    samtools faidx ${REF_GENOME}
+    samtools faidx "${REF_GENOME}"
     echo "Done."
 else
     echo "STEP 1: FASTA index already exists. Skipping."
@@ -216,8 +237,8 @@ fi
 if [ ! -f "${PREFIX}.dict" ]; then
     echo "STEP 2: Creating sequence dictionary with GATK..."
     gatk CreateSequenceDictionary \
-        -R ${REF_GENOME} \
-        -O ${PREFIX}.dict
+        -R "${REF_GENOME}" \
+        -O "${PREFIX}.dict"
     echo "Done."
 else
     echo "STEP 2: Sequence dictionary already exists. Skipping."
@@ -226,15 +247,13 @@ fi
 # --- Step 3: Create BWA index for alignment ---
 if [ ! -f "${REF_GENOME}.bwt" ]; then
     echo "STEP 3: Creating BWA index..."
-    bwa index ${REF_GENOME}
+    bwa index "${REF_GENOME}"
     echo "Done."
 else
     echo "STEP 3: BWA index already exists. Skipping."
 fi
 
-echo "------------------------------------------------"
 echo "--- Preparation Complete! ---"
-echo "Your reference genome is now ready for mapping and variant calling."
 ```
 
 
