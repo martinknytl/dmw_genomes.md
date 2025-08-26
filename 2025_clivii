@@ -178,86 +178,18 @@ samtools index ${1}_rg.bam
 
 ### 7) making index, dictionary file, and bwa index
 
+# Define your reference genome filename
+REF_GENOME="GCA_046118455.1_ASM4611845v1_genomic.fna"
 
-```
-#!/bin/sh
+# Run the command
+samtools faidx ${REF_GENOME}
 
-#======================================================================================
-#                           INSTRUCTIONS FOR THE SCHEDULER
-#======================================================================================
-# You should have your own #SBATCH directives here. For example:
-#SBATCH --job-name=indexing
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --time=12:00:00
-#SBATCH --mem=8gb
-#SBATCH --output=indexing.%J.out
-#SBATCH --error=indexing.%J.err
-#SBATCH --account=your_account_name # e.g., rrg-ben
+# Assuming GATK is installed and your reference is reference.fna
+gatk CreateSequenceDictionary \
+    -R GCA_046118455.1_ASM4611845v1_genomic.fna \
+    -O reference.dict
 
-#======================================================================================
-#                                 COMMANDS TO EXECUTE
-#======================================================================================
-
-# Stop the script if any command fails
-set -e
-set -o pipefail
-
-# --- !! IMPORTANT: SETUP THE SOFTWARE ENVIRONMENT !! ---
-echo "Loading Conda..."
-# This next line makes the 'conda' command available to the script.
-# NOTE: The path might be ~/anaconda3/ if you installed the full Anaconda.
-source ~/miniconda3/etc/profile.d/conda.sh
-
-echo "Activating bioinformatics environment..."
-# This next line adds samtools, gatk, and bwa to the PATH.
-conda activate gatk_env #<-- IMPORTANT: Make sure 'gatk_env' is the correct name!
-
-
-echo "--- Starting GATK Reference Genome Preparation ---"
-
-# --- Configuration ---
-REF_GENOME="GCA_046118455.1_ASM4611845v1_genomic.fna" 
-PREFIX=$(basename "${REF_GENOME}" .fna) 
-
-echo "Input FASTA: ${REF_GENOME}"
-echo "Output Prefix: ${PREFIX}"
-echo "------------------------------------------------"
-
-# --- Step 1: Create FASTA index (.fai) using Samtools ---
-if [ ! -f "${REF_GENOME}.fai" ]; then
-    echo "STEP 1: Creating FASTA index with Samtools..."
-    samtools faidx "${REF_GENOME}"
-    echo "Done."
-else
-    echo "STEP 1: FASTA index already exists. Skipping."
-fi
-
-# --- Step 2: Create Sequence Dictionary (.dict) using GATK ---
-if [ ! -f "${PREFIX}.dict" ]; then
-    echo "STEP 2: Creating sequence dictionary with GATK..."
-    gatk CreateSequenceDictionary \
-        -R "${REF_GENOME}" \
-        -O "${PREFIX}.dict"
-    echo "Done."
-else
-    echo "STEP 2: Sequence dictionary already exists. Skipping."
-fi
-
-# --- Step 3: Create BWA index for alignment ---
-if [ ! -f "${REF_GENOME}.bwt" ]; then
-    echo "STEP 3: Creating BWA index..."
-    bwa index "${REF_GENOME}"
-    echo "Done."
-else
-    echo "STEP 3: BWA index already exists. Skipping."
-fi
-
-echo "--- Preparation Complete! ---"
-```
-
-
-### 7) call haplotype aka haplotype caller
+### 8) call haplotype aka haplotype caller
 
 ```
 #!/bin/sh
