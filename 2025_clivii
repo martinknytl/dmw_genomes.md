@@ -187,7 +187,7 @@ samtools faidx ${REF_GENOME}
 # Assuming GATK is installed and your reference is reference.fna
 gatk CreateSequenceDictionary \
     -R GCA_046118455.1_ASM4611845v1_genomic.fna \
-    -O reference.dict
+    -O GCA_046118455.1_ASM4611845v1_genomic.dict
 
 ### 8) call haplotype aka haplotype caller
 
