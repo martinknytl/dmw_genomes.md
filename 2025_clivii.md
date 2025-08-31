@@ -17,7 +17,6 @@ make the index (I am not sure with this command). I used it a while ago and I se
 bwa index GCA_046118455.1_ASM4611845v1_genomic.fna
 ```
 
-
 ### 2) trimmomatic
 
 go to raw_data directory and check if there is `TruSeq2_and_3-PE-2.fa`. This file includes adaptor sequences. Then script is executed from the same directory.
@@ -175,19 +174,6 @@ module load picard/3.1.0
 module load StdEnv/2023 samtools/1.20
 samtools index ${1}_rg.bam
 ```
-
-### 7) making index, dictionary file, and bwa index
-
-# Define your reference genome filename
-REF_GENOME="GCA_046118455.1_ASM4611845v1_genomic.fna"
-
-# Run the command
-samtools faidx ${REF_GENOME}
-
-# Assuming GATK is installed and your reference is reference.fna
-gatk CreateSequenceDictionary \
-    -R GCA_046118455.1_ASM4611845v1_genomic.fna \
-    -O GCA_046118455.1_ASM4611845v1_genomic.dict
 
 ### 8) call haplotype aka haplotype caller
 
