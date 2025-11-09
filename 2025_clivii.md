@@ -182,15 +182,16 @@ samtools index ${1}_rg.bam
 #SBATCH --job-name=HaplotypeCaller
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --time=72:00:00
+#SBATCH --time=168:00:00
 #SBATCH --mem=30gb
 #SBATCH --output=HaplotypeCaller.%J.out
 #SBATCH --error=HaplotypeCaller.%J.err
 #SBATCH --account=rrg-ben
 
 
-# This script will read in the *merged_rg.bam file names in a directory, and 
-# make and execute the GATK command "RealignerTargetCreator" on these files. 
+# This script will read in the *_sorted.bam file names in a directory, and 
+# make and execute the GATK command "RealignerTargetCreator" on these files.
+# the script is modified for scaffold clivii genome - one script is for all scaffolds. chromosomes as argument 3 was removed
 
 # execute like this:
 # sbatch 2021_HaplotypeCaller.sh ref dir_of_bam chr
@@ -201,32 +202,12 @@ module load gatk/4.4.0.0 StdEnv/2023
 
 for file in ${2}*_rg.bam
 do
-    gatk --java-options -Xmx24G HaplotypeCaller  -I ${file} -R ${1} -L ${3} -O ${file}_${3}.g.vcf -ERC GVCF
+    gatk --java-options -Xmx24G HaplotypeCaller  -I ${file} -R ${1} -O ${file}.g.vcf -ERC GVCF
 done
 ```
 
 ```
-for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2024_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ Chr$x\L; done
-```
-
-```
-for x in {1..8}; do sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2024_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ Chr$x\S; done
-```
-
-```
-sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2024_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ Chr9_10L
-```
-```
-sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2024_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ Chr9_10S
-```
-
-```
-sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2024_HaplotypeCaller.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ Scaffolds
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2025_HaplotypeCaller_scaffolds_only.sh /home/knedlo/projects/rrg-ben/knedlo/clivii_male_genome/GCA_046118455.1_ASM4611845v1_genomic.fna ./
 ```
 
 `./` is the directory of each individual `/home/knedlo/projects/rrg-ben/knedlo/2024_cliv/haplotype_caller/fem_cliv_CAS260392` etc.
-
-execute read-group script for each individual separately:
-```
-sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2022_picard_add_read_groups_and_index.sh fem_cliv_Cas260421.merged
-```
