@@ -98,7 +98,7 @@ the script were executed by:
 sbatch /home/knedlo/scratch/knedlo/ben_scripts/2020_align_paired_fq_to_ref.sh /home/knedlo/scratch/knedlo/clivii_male_genome/GCA_046118455.1_ASM4611845v1_genomic.fna .
 ```
 
-### 5) merge 2 bam files in 1
+### 5) merge 2 or 3 bam files in 1
 
 date are combined from two different WGS. Some reads have 3 files and some have 2 files
 
