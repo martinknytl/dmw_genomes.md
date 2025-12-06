@@ -183,6 +183,10 @@ module load StdEnv/2023 samtools/1.20
 samtools index ${1}_rg.bam
 ```
 
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2022_picard_add_read_groups_and_index.sh fem_cliv_CAS260392.merged
+```
+
 ### 8) call haplotype aka haplotype caller
 
 ```
