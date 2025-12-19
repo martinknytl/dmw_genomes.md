@@ -223,3 +223,41 @@ sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2025_HaplotypeCaller_sca
 ```
 
 `./` is the directory of each individual `/home/knedlo/projects/rrg-ben/knedlo/2024_cliv/haplotype_caller/fem_cliv_CAS260392` etc.
+
+
+### 9) CombineGVCFs
+
+```
+#!/bin/sh
+#SBATCH --job-name=CombineGVCFs
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=48:00:00
+#SBATCH --mem=12gb
+#SBATCH --output=CombineGVCFs.%J.out
+#SBATCH --error=CombineGVCFs.%J.err
+#SBATCH --account=def-ben
+
+# for graham.computecanada change account def-ben to rrg-ben 
+# This script will read in the *.g.vcf file names in a directory, and 
+# make and execute the GATK command "GenotypeGVCFs" on these files. 
+
+# execute like this:
+# sbatch ../../ben_scripts/2021_CombineGVCFs.sh /home/knedlo/projects/rrg-ben/knedlo/laevis_genome/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa ./ Chr1L
+
+module load nixpkgs/16.09 gatk/4.1.0.0
+
+commandline="gatk --java-options -Xmx10G CombineGVCFs -R ${1}"
+for file in ${2}*g.vcf
+do
+    commandline+=" -V ${file}"
+done
+
+commandline+=" -O ${2}allsites.g.vcf.gz"
+
+${commandline}
+```
+
+```
+sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2025_CombineGVCFs_Scaffolds_only.sh /home/knedlo/projects/rrg-ben/knedlo/clivii_male_genome/GCA_046118455.1_ASM4611845v1_genomic.fna ./
+```
