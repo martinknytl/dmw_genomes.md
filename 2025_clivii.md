@@ -261,3 +261,4 @@ ${commandline}
 ```
 sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2025_CombineGVCFs_Scaffolds_only.sh /home/knedlo/projects/rrg-ben/knedlo/clivii_male_genome/GCA_046118455.1_ASM4611845v1_genomic.fna ./
 ```
+`./` is the directory of each individual, e.g., `/home/knedlo/projects/rrg-ben/knedlo/2023_2024_clivii_WGS/2024_cliv_complete_WGS/haplotype_caller/mal_cliv_Cas262488`
