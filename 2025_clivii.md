@@ -236,7 +236,7 @@ sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2025_HaplotypeCaller_sca
 #SBATCH --mem=12gb
 #SBATCH --output=CombineGVCFs.%J.out
 #SBATCH --error=CombineGVCFs.%J.err
-#SBATCH --account=def-ben
+#SBATCH --account=rrg-ben
 
 # for graham.computecanada change account def-ben to rrg-ben 
 # This script will read in the *.g.vcf file names in a directory, and 
@@ -261,4 +261,4 @@ ${commandline}
 ```
 sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2025_CombineGVCFs_Scaffolds_only.sh /home/knedlo/projects/rrg-ben/knedlo/clivii_male_genome/GCA_046118455.1_ASM4611845v1_genomic.fna ./
 ```
-`./` is the directory where all haplotype caller files are, e.g., `/home/knedlo/projects/rrg-ben/knedlo/2023_2024_clivii_WGS/2024_cliv_complete_WGS/CombineGVCFs`
+`./` is the directory where all haplotype caller files are, e.g., `/home/knedlo/projects/rrg-ben/knedlo/2023_2024_clivii_WGS/2024_cliv_complete_WGS/combineGVCFs`
