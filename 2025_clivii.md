@@ -233,7 +233,7 @@ sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2025_HaplotypeCaller_sca
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --time=48:00:00
-#SBATCH --mem=12gb
+#SBATCH --mem=32gb
 #SBATCH --output=CombineGVCFs.%J.out
 #SBATCH --error=CombineGVCFs.%J.err
 #SBATCH --account=rrg-ben
