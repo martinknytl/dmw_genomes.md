@@ -247,7 +247,7 @@ sbatch /home/knedlo/projects/rrg-ben/knedlo/ben_scripts/2025_HaplotypeCaller_sca
 
 module load nixpkgs/16.09 gatk/4.1.0.0
 
-commandline="gatk --java-options -Xmx10G CombineGVCFs -R ${1}"
+commandline="gatk --java-options -Xmx30G CombineGVCFs -R ${1}"
 for file in ${2}*g.vcf
 do
     commandline+=" -V ${file}"
