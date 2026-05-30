@@ -10,11 +10,12 @@ make the genome blastable:
 makeblastdb -in GCA_046118455.1_ASM4611845v1_genomic.fna -dbtype nucl -out GCA_046118455.1_ASM4611845v1_genomic.fna_blastable
 ```
 
-make the index (I am not sure with this command). I used it a while ago and I searched in history
+make the bwa index file:
 
 ```
 bwa index GCA_046118455.1_ASM4611845v1_genomic.fna
 ```
+
 
 ### 2) trimmomatic
 
@@ -56,12 +57,6 @@ done
 `./` = path `/home/knedlo/projects/rrg-ben/knedlo/2024_cliv/raw_data`
 
 ### 4) map trimmed sequences to X. clivii genome (bwa alignment)
-
-make the bwa index file:
-
-```
-bwa index GCA_046118455.1_ASM4611845v1_genomic.fna
-```
 
 move each two files into one directory, e.g.: `CAS260392_S4_L001_001_trim_R1.fq.gz` and `CAS260392_S4_L001_001_trim_R2.fq.gz`. bwa command will be executed for each directory.
 
